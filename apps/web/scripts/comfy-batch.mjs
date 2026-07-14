@@ -6,30 +6,44 @@ const here = dirname(fileURLToPath(import.meta.url));
 const artDir = join(here, "..", "public", "art");
 
 const COMFY = process.env.COMFY_URL ?? "http://127.0.0.1:8188";
-const CKPT = process.env.COMFY_CKPT;
-const STEPS = Number(process.env.COMFY_STEPS ?? 30);
-const CFG = Number(process.env.COMFY_CFG ?? 6.5);
-const SAMPLER = process.env.COMFY_SAMPLER ?? "dpmpp_2m";
-const SCHEDULER = process.env.COMFY_SCHEDULER ?? "karras";
+const WORKFLOW = process.env.COMFY_WORKFLOW ?? join(here, "comfy", "darkage.api.json");
 const SQUARE = Number(process.env.COMFY_SQUARE ?? 1024);
 const WIDE_W = Number(process.env.COMFY_WIDE_W ?? 1344);
 const WIDE_H = Number(process.env.COMFY_WIDE_H ?? 768);
 const ONLY = process.env.ONLY;
-
-if (!CKPT) {
-  console.error(
-    "Set COMFY_CKPT to your checkpoint filename, e.g.\n" +
-      "  COMFY_CKPT=juggernautXL_v9.safetensors node apps/web/scripts/comfy-batch.mjs\n" +
-      "(it must exist in ComfyUI/models/checkpoints/)",
-  );
-  process.exit(1);
-}
+const CKPT = process.env.COMFY_CKPT;
 
 const manifest = JSON.parse(readFileSync(join(artDir, "art-manifest.json"), "utf8"));
-const template = JSON.parse(readFileSync(join(here, "comfy", "darkage.api.json"), "utf8"));
-const clientId = `darkage-${STEPS}-${SQUARE}`;
+const template = JSON.parse(readFileSync(WORKFLOW, "utf8"));
+const clientId = "darkage-batch";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function locate(graph) {
+  const entries = Object.entries(graph);
+  const sampler = entries.find(
+    ([, n]) =>
+      n.inputs &&
+      "latent_image" in n.inputs &&
+      "positive" in n.inputs &&
+      "negative" in n.inputs,
+  );
+  if (!sampler) throw new Error("could not find a KSampler node in the workflow");
+  const [, s] = sampler;
+  const save = entries.find(([, n]) => String(n.class_type).includes("SaveImage"));
+  if (!save) throw new Error("could not find a SaveImage node in the workflow");
+  const ckpt = entries.find(([, n]) => n.class_type === "CheckpointLoaderSimple");
+  return {
+    samplerId: sampler[0],
+    positiveId: s.inputs.positive[0],
+    negativeId: s.inputs.negative[0],
+    latentId: s.inputs.latent_image[0],
+    saveId: save[0],
+    ckptId: ckpt ? ckpt[0] : null,
+  };
+}
+
+const ref = locate(template);
 
 async function queuePrompt(graph) {
   const res = await fetch(`${COMFY}/prompt`, {
@@ -39,12 +53,12 @@ async function queuePrompt(graph) {
   });
   if (!res.ok) throw new Error(`/prompt ${res.status}: ${await res.text()}`);
   const data = await res.json();
-  if (data.error) throw new Error(JSON.stringify(data.error));
+  if (data.error) throw new Error(JSON.stringify(data.error).slice(0, 400));
   return data.prompt_id;
 }
 
 async function waitForImage(promptId) {
-  for (let i = 0; i < 600; i += 1) {
+  for (let i = 0; i < 900; i += 1) {
     const res = await fetch(`${COMFY}/history/${promptId}`);
     const hist = await res.json();
     const entry = hist[promptId];
@@ -53,7 +67,7 @@ async function waitForImage(promptId) {
         const imgs = entry.outputs[nodeId].images;
         if (imgs && imgs.length) return imgs[0];
       }
-      if (entry.status?.status_str === "error") throw new Error("generation error");
+      if (entry.status?.status_str === "error") throw new Error("generation error (see ComfyUI)");
     }
     await sleep(1000);
   }
@@ -72,19 +86,19 @@ async function download(image) {
 }
 
 function buildGraph(asset, index) {
-  const graph = structuredClone(template);
+  const g = structuredClone(template);
   const wide = asset.category === "location";
-  graph["4"].inputs.ckpt_name = CKPT;
-  graph["5"].inputs.width = wide ? WIDE_W : SQUARE;
-  graph["5"].inputs.height = wide ? WIDE_H : SQUARE;
-  graph["6"].inputs.text = asset.prompt;
-  graph["3"].inputs.seed = 100000 + index;
-  graph["3"].inputs.steps = STEPS;
-  graph["3"].inputs.cfg = CFG;
-  graph["3"].inputs.sampler_name = SAMPLER;
-  graph["3"].inputs.scheduler = SCHEDULER;
-  graph["9"].inputs.filename_prefix = `darkage/${asset.slug}`;
-  return graph;
+  g[ref.positiveId].inputs.text = asset.prompt;
+  if ("width" in g[ref.latentId].inputs) {
+    g[ref.latentId].inputs.width = wide ? WIDE_W : SQUARE;
+    g[ref.latentId].inputs.height = wide ? WIDE_H : SQUARE;
+  }
+  const s = g[ref.samplerId].inputs;
+  if ("seed" in s) s.seed = 100000 + index;
+  else if ("noise_seed" in s) s.noise_seed = 100000 + index;
+  g[ref.saveId].inputs.filename_prefix = `darkage/${asset.slug}`;
+  if (CKPT && ref.ckptId) g[ref.ckptId].inputs.ckpt_name = CKPT;
+  return g;
 }
 
 const targets = manifest.assets.filter((a) => !ONLY || a.category === ONLY);
@@ -92,8 +106,11 @@ let done = 0;
 let skipped = 0;
 let failed = 0;
 
+console.log(`ComfyUI batch: ${targets.length} images`);
+console.log(`  server:   ${COMFY}`);
+console.log(`  workflow: ${WORKFLOW}`);
 console.log(
-  `ComfyUI batch: ${targets.length} images via ${COMFY} (ckpt: ${CKPT})\n`,
+  `  detected: sampler=${ref.samplerId} positive=${ref.positiveId} save=${ref.saveId}\n`,
 );
 
 for (let i = 0; i < targets.length; i += 1) {
