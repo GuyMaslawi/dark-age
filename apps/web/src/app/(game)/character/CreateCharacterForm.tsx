@@ -32,6 +32,31 @@ export function CreateCharacterForm() {
         השם הזה ילווה אותך בכל הממלכה — בחר בחוכמה.
       </p>
 
+      <div className="panel mb-6 space-y-3 p-5">
+        <h2 className="font-semibold text-gold">ברוך הבא לממלכת האופל</h2>
+        <p className="text-sm text-neutral-400">
+          צוד מפלצות בשמונה אזורים, אסוף ציוד ונשק, התמודד מול שחקנים אחרים,
+          הצטרף לשבט ועלה לצמרת הדירוג. הנה ארבעת המאפיינים שיעצבו את הדמות שלך:
+        </p>
+        <ul className="grid grid-cols-2 gap-2 text-xs text-neutral-300">
+          <li>
+            <span className="text-gold-bright">כוח</span> — נזק בקרב
+          </li>
+          <li>
+            <span className="text-gold-bright">בינה</span> — דיוק הפגיעה
+          </li>
+          <li>
+            <span className="text-gold-bright">זריזות</span> — התחמקות ממכות
+          </li>
+          <li>
+            <span className="text-gold-bright">סיבולת</span> — בריאות והגנה
+          </li>
+        </ul>
+        <p className="text-xs text-neutral-500">
+          תתחיל עם {5} נקודות לחלוקה חופשית, ותקבל עוד בכל עליית רמה.
+        </p>
+      </div>
+
       <form action={formAction} className="panel space-y-6 p-6">
         <div>
           <label htmlFor="name" className="mb-1 block text-sm text-neutral-300">

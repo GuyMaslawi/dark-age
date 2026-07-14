@@ -79,12 +79,12 @@ export type StatKey = (typeof STAT_KEYS)[number];
 
 export const COMBAT = {
   maxRounds: 30,
-  hitBase: 0.75,
-  hitPerPoint: 0.02,
-  hitFloor: 0.2,
-  hitCeil: 0.95,
-  strengthDamageCoeff: 0.8,
-  enduranceReductionCoeff: 0.4,
+  hitBase: 0.8,
+  hitPerPoint: 0.012,
+  hitFloor: 0.35,
+  hitCeil: 0.97,
+  strengthDamageCoeff: 1.0,
+  enduranceReductionCoeff: 0.25,
   armorReductionCoeff: 0.5,
   damageVariance: 0.15,
   critChance: 0.08,
