@@ -12,6 +12,7 @@ const WIDE_W = Number(process.env.COMFY_WIDE_W ?? 1344);
 const WIDE_H = Number(process.env.COMFY_WIDE_H ?? 768);
 const ONLY = process.env.ONLY;
 const CKPT = process.env.COMFY_CKPT;
+const LIMIT = process.env.LIMIT ? Number(process.env.LIMIT) : Infinity;
 
 const manifest = JSON.parse(readFileSync(join(artDir, "art-manifest.json"), "utf8"));
 const template = JSON.parse(readFileSync(WORKFLOW, "utf8"));
@@ -101,7 +102,9 @@ function buildGraph(asset, index) {
   return g;
 }
 
-const targets = manifest.assets.filter((a) => !ONLY || a.category === ONLY);
+const targets = manifest.assets
+  .filter((a) => !ONLY || a.category === ONLY)
+  .slice(0, LIMIT === Infinity ? undefined : LIMIT);
 let done = 0;
 let skipped = 0;
 let failed = 0;
