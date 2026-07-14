@@ -5,6 +5,8 @@ import { useFormStatus } from "react-dom";
 import type { EquipmentSlot, ItemType, Rarity } from "@kingdom/db";
 import type { EffectiveStats } from "@kingdom/game-engine";
 import { ItemCard, type ItemStats } from "@/components/ItemCard";
+import { ItemIcon } from "@/components/art/ItemIcon";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { EQUIP_SLOTS } from "@/lib/equipment";
 import { rarityMeta } from "@/lib/rarity";
 import {
@@ -16,6 +18,7 @@ import {
 export type InventoryItemView = {
   inventoryItemId: string;
   equippedSlot: EquipmentSlot | null;
+  slug: string;
   name: string;
   description: string;
   rarity: Rarity;
@@ -96,8 +99,8 @@ export function InventoryView({
   const error = equipState.error ?? unequipState.error;
 
   return (
-    <div className="mx-auto max-w-4xl space-y-5">
-      <h1 className="text-2xl font-bold text-gold">מלאי וציוד</h1>
+    <SceneBackdrop slug="keep" icon="🎒" title="מלאי וציוד">
+      <div className="space-y-5">
       {error && (
         <p className="rounded-md border border-blood/40 bg-blood/10 px-3 py-2 text-sm text-red-300">
           {error}
@@ -120,16 +123,25 @@ export function InventoryView({
                 >
                   <div className="mb-1 text-[11px] text-neutral-500">{label}</div>
                   {item ? (
-                    <div className="space-y-2">
-                      <div className={`text-sm font-medium ${meta?.text}`}>
-                        {item.name}
-                      </div>
-                      <ActionButton
-                        field="inventoryItemId"
-                        value={item.inventoryItemId}
-                        label="הסר"
-                        variant="ghost"
+                    <div className="flex items-center gap-2">
+                      <ItemIcon
+                        slug={item.slug}
+                        type={item.type}
+                        rarity={item.rarity}
+                        name={item.name}
+                        size={40}
                       />
+                      <div className="min-w-0 flex-1 space-y-1.5">
+                        <div className={`truncate text-sm font-medium ${meta?.text}`}>
+                          {item.name}
+                        </div>
+                        <ActionButton
+                          field="inventoryItemId"
+                          value={item.inventoryItemId}
+                          label="הסר"
+                          variant="ghost"
+                        />
+                      </div>
                     </div>
                   ) : (
                     <div className="text-sm text-neutral-600">ריק</div>
@@ -172,6 +184,8 @@ export function InventoryView({
                 key={item.inventoryItemId}
                 name={item.name}
                 rarity={item.rarity}
+                type={item.type}
+                slug={item.slug}
                 levelRequirement={item.levelRequirement}
                 stats={item.stats}
                 description={item.description}
@@ -191,6 +205,7 @@ export function InventoryView({
           </form>
         )}
       </div>
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

@@ -147,6 +147,7 @@ export async function attackMonsterAction(
           gender: null,
           level: monster.level,
           kind: "monster",
+          slug: monster.slug,
         },
         turns: outcome.turns,
         winner: outcome.winner,

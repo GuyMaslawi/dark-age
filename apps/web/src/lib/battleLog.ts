@@ -7,6 +7,7 @@ export type BattleLogFighter = {
   gender: "MALE" | "FEMALE" | null;
   level: number;
   kind: "character" | "monster";
+  slug?: string | null;
 };
 
 export type BattleRewards = {

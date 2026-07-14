@@ -48,6 +48,8 @@ export default async function MarketPage() {
     name: item.name,
     description: item.description,
     rarity: item.rarity,
+    type: item.type,
+    slug: item.slug,
     levelRequirement: item.levelRequirement,
     price: item.basePrice,
     stats: {
@@ -64,6 +66,8 @@ export default async function MarketPage() {
     inventoryItemId: entry.id,
     name: entry.item.name,
     rarity: entry.item.rarity,
+    type: entry.item.type,
+    slug: entry.item.slug,
     levelRequirement: entry.item.levelRequirement,
     sellPrice: npcSellPrice(entry.item.basePrice),
     stats: {
@@ -80,6 +84,8 @@ export default async function MarketPage() {
     listingId: listing.id,
     name: listing.item.name,
     rarity: listing.item.rarity,
+    type: listing.item.type,
+    slug: listing.item.slug,
     levelRequirement: listing.item.levelRequirement,
     price: listing.price,
     sellerName: listing.seller.name,

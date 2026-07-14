@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@kingdom/db";
 import { requireUser, getCurrentCharacter } from "@/lib/session";
-import { Avatar } from "@/components/Avatar";
+import { Portrait } from "@/components/art/Portrait";
+import { ItemIcon } from "@/components/art/ItemIcon";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { EQUIP_SLOTS } from "@/lib/equipment";
 import { rarityMeta } from "@/lib/rarity";
 
@@ -37,9 +39,15 @@ export default async function PlayerProfilePage({
   const winRate = battles > 0 ? Math.round((character.pvpWins / battles) * 100) : 0;
 
   return (
-    <div className="mx-auto max-w-2xl space-y-5">
+    <SceneBackdrop slug="town" icon="⚔️" title="פרופיל שחקן" maxWidth="max-w-2xl">
+      <div className="space-y-5">
       <div className="panel flex flex-col gap-4 p-5 sm:flex-row sm:items-center">
-        <Avatar avatarKey={character.avatarKey} gender={character.gender} size={96} />
+        <Portrait
+          avatarKey={character.avatarKey}
+          gender={character.gender}
+          name={character.name}
+          size={96}
+        />
         <div className="flex-1">
           <h1 className="text-2xl font-bold text-gold">{character.name}</h1>
           <p className="text-sm text-neutral-400">
@@ -87,8 +95,17 @@ export default async function PlayerProfilePage({
               >
                 <div className="mb-1 text-[11px] text-neutral-500">{label}</div>
                 {entry ? (
-                  <div className={`text-sm font-medium ${meta?.text}`}>
-                    {entry.item.name}
+                  <div className="flex items-center gap-2">
+                    <ItemIcon
+                      slug={entry.item.slug}
+                      type={entry.item.type}
+                      rarity={entry.item.rarity}
+                      name={entry.item.name}
+                      size={36}
+                    />
+                    <div className={`min-w-0 truncate text-sm font-medium ${meta?.text}`}>
+                      {entry.item.name}
+                    </div>
                   </div>
                 ) : (
                   <div className="text-sm text-neutral-600">ריק</div>
@@ -98,6 +115,7 @@ export default async function PlayerProfilePage({
           })}
         </div>
       </div>
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

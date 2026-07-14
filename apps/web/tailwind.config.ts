@@ -31,6 +31,41 @@ const config: Config = {
       boxShadow: {
         gold: "0 0 0 1px rgba(201,162,39,0.25), 0 8px 30px rgba(0,0,0,0.6)",
       },
+      keyframes: {
+        hitshake: {
+          "0%,100%": { transform: "translateX(0)" },
+          "20%": { transform: "translateX(-6px) rotate(-1deg)" },
+          "40%": { transform: "translateX(5px) rotate(1deg)" },
+          "60%": { transform: "translateX(-4px)" },
+          "80%": { transform: "translateX(3px)" },
+        },
+        hitflash: {
+          "0%": { opacity: "0" },
+          "35%": { opacity: "0.85" },
+          "100%": { opacity: "0" },
+        },
+        floatup: {
+          "0%": { opacity: "0", transform: "translate(-50%, 0) scale(0.7)" },
+          "20%": { opacity: "1", transform: "translate(-50%, -12px) scale(1)" },
+          "100%": { opacity: "0", transform: "translate(-50%, -52px) scale(1)" },
+        },
+        strike: {
+          "0%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(var(--strike-x, 0))" },
+          "100%": { transform: "translateX(0)" },
+        },
+        emberdrift: {
+          "0%": { transform: "translateY(0)", opacity: "0" },
+          "30%": { opacity: "0.7" },
+          "100%": { transform: "translateY(-40px)", opacity: "0" },
+        },
+      },
+      animation: {
+        hitshake: "hitshake 0.4s ease-in-out",
+        hitflash: "hitflash 0.45s ease-out",
+        floatup: "floatup 1.1s ease-out forwards",
+        strike: "strike 0.35s ease-in-out",
+      },
     },
   },
   plugins: [],

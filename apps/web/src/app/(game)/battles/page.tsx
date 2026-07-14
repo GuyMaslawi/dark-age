@@ -2,6 +2,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { prisma, type BattleResult } from "@kingdom/db";
 import { requireUser, getCurrentCharacter } from "@/lib/session";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
+import { MonsterArt } from "@/components/art/MonsterArt";
+import { Portrait } from "@/components/art/Portrait";
 import type { BattleLogData } from "@/lib/battleLog";
 
 const resultBadge: Record<BattleResult, { text: string; className: string }> = {
@@ -24,9 +27,8 @@ export default async function BattlesPage() {
   });
 
   return (
-    <div className="mx-auto max-w-2xl space-y-4">
-      <h1 className="text-2xl font-bold text-gold">יומן קרבות</h1>
-
+    <SceneBackdrop slug="arena" icon="🩸" title="יומן קרבות" maxWidth="max-w-2xl">
+      <div className="space-y-4">
       {battles.length === 0 ? (
         <div className="panel p-8 text-center text-neutral-400">
           עדיין לא נלחמת. צא ל
@@ -44,9 +46,25 @@ export default async function BattlesPage() {
               <li key={battle.id}>
                 <Link
                   href={`/battles/${battle.id}`}
-                  className="panel flex items-center justify-between gap-3 p-3 transition-colors hover:border-gold/40"
+                  className="panel flex items-center gap-3 p-3 transition-colors hover:border-gold/40"
                 >
-                  <div className="min-w-0">
+                  {log.defender.kind === "character" && log.defender.avatarKey ? (
+                    <Portrait
+                      avatarKey={log.defender.avatarKey}
+                      gender={log.defender.gender ?? "MALE"}
+                      name={log.defender.name}
+                      size={44}
+                      rounded="rounded-lg"
+                    />
+                  ) : (
+                    <MonsterArt
+                      slug={log.defender.slug ?? log.defender.name}
+                      name={log.defender.name}
+                      size={44}
+                      rounded="rounded-lg"
+                    />
+                  )}
+                  <div className="min-w-0 flex-1">
                     <div className="truncate font-medium">מול {log.defender.name}</div>
                     <div className="text-xs text-neutral-500">
                       ניסיון +{battle.xpGained}
@@ -65,6 +83,7 @@ export default async function BattlesPage() {
           })}
         </ul>
       )}
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

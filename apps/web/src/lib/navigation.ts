@@ -5,6 +5,7 @@ export type NavItem = {
 };
 
 export const navItems: NavItem[] = [
+  { href: "/town", label: "העיר", icon: "🏰" },
   { href: "/character", label: "דמות", icon: "⚔️" },
   { href: "/world", label: "עולם", icon: "🗺️" },
   { href: "/battles", label: "קרבות", icon: "🩸" },

@@ -21,6 +21,7 @@ export default async function InventoryPage() {
   const toView = (entry: (typeof inventory)[number]): InventoryItemView => ({
     inventoryItemId: entry.id,
     equippedSlot: entry.equippedSlot,
+    slug: entry.item.slug,
     name: entry.item.name,
     description: entry.item.description,
     rarity: entry.item.rarity,

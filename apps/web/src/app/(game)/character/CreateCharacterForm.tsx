@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { Avatar } from "@/components/Avatar";
+import { Portrait } from "@/components/art/Portrait";
 import { avatarOptions, DEFAULT_AVATAR_KEY } from "@/lib/avatars";
 import { createCharacterAction, type CreateCharacterState } from "./actions";
 
@@ -108,7 +108,13 @@ export function CreateCharacterForm() {
                     : "border-void-edge hover:border-gold/40"
                 }`}
               >
-                <Avatar avatarKey={option.key} gender={gender} size={64} />
+                <Portrait
+                  avatarKey={option.key}
+                  gender={gender}
+                  name={option.label}
+                  size={72}
+                  rounded="rounded-lg"
+                />
                 <span className="text-xs text-neutral-400">{option.label}</span>
               </button>
             ))}

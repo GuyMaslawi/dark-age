@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { startProfessionAction, type ProfessionActionState } from "./actions";
 
 export type ProfessionOption = {
@@ -82,14 +83,14 @@ export function ProfessionsView({
   );
 
   return (
-    <div className="mx-auto max-w-3xl space-y-5">
-      <div>
-        <h1 className="text-2xl font-bold text-gold">מלאכות</h1>
-        <p className="mt-1 text-sm text-neutral-400">
-          התחל פעולה מתוזמנת אחת בכל פעם. היא תסתיים גם כשאתה לא מחובר.
-        </p>
-      </div>
-
+    <SceneBackdrop
+      slug="forge"
+      icon="⚒️"
+      title="הנפחייה"
+      subtitle="התחל פעולה מתוזמנת אחת בכל פעם. היא תסתיים גם כשאתה לא מחובר."
+      maxWidth="max-w-3xl"
+    >
+      <div className="space-y-5">
       {activeJob && (
         <div className="panel flex items-center justify-between p-4">
           <div>
@@ -139,6 +140,7 @@ export function ProfessionsView({
           </ul>
         </div>
       )}
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

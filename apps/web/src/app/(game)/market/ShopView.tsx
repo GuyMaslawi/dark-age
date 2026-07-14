@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import type { Rarity } from "@kingdom/db";
+import type { ItemType, Rarity } from "@kingdom/db";
 import { ItemCard, type ItemStats } from "@/components/ItemCard";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { rarityMeta } from "@/lib/rarity";
 import {
   buyAction,
@@ -20,6 +21,8 @@ export type ShopItemView = {
   name: string;
   description: string;
   rarity: Rarity;
+  type: ItemType;
+  slug: string;
   levelRequirement: number;
   price: number;
   stats: ItemStats;
@@ -29,6 +32,8 @@ export type SellItemView = {
   inventoryItemId: string;
   name: string;
   rarity: Rarity;
+  type: ItemType;
+  slug: string;
   levelRequirement: number;
   sellPrice: number;
   stats: ItemStats;
@@ -38,6 +43,8 @@ export type ListingView = {
   listingId: string;
   name: string;
   rarity: Rarity;
+  type: ItemType;
+  slug: string;
   levelRequirement: number;
   price: number;
   sellerName: string;
@@ -149,15 +156,13 @@ export function ShopView({
   ];
 
   return (
-    <div className="mx-auto max-w-4xl space-y-5">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gold">שוק</h1>
-        <span className="flex items-center gap-1 text-gold">
-          <span aria-hidden>🪙</span>
-          <span className="tabular-nums">{gold}</span>
-        </span>
-      </div>
-
+    <SceneBackdrop
+      slug="market"
+      icon="⚖️"
+      title="השוק"
+      subtitle={`🪙 ${gold} זהב`}
+    >
+      <div className="space-y-5">
       <div className="flex flex-wrap gap-2">
         {tabs.map((option) => (
           <button
@@ -184,6 +189,8 @@ export function ShopView({
               key={item.itemId}
               name={item.name}
               rarity={item.rarity}
+              type={item.type}
+              slug={item.slug}
               levelRequirement={item.levelRequirement}
               stats={item.stats}
               description={item.description}
@@ -207,6 +214,8 @@ export function ShopView({
                 key={item.inventoryItemId}
                 name={item.name}
                 rarity={item.rarity}
+                type={item.type}
+                slug={item.slug}
                 levelRequirement={item.levelRequirement}
                 stats={item.stats}
               >
@@ -286,6 +295,8 @@ export function ShopView({
                     key={listing.listingId}
                     name={listing.name}
                     rarity={listing.rarity}
+                    type={listing.type}
+                    slug={listing.slug}
                     levelRequirement={listing.levelRequirement}
                     stats={listing.stats}
                     description={`מוכר: ${listing.sellerName}`}
@@ -301,6 +312,7 @@ export function ShopView({
           </section>
         </div>
       )}
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

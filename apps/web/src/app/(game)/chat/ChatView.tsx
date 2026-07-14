@@ -7,6 +7,7 @@ import {
   type ChatMessagePayload,
 } from "@kingdom/protocol";
 import { useSocket } from "@/components/SocketProvider";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 
 export type ChatMessageView = {
   id: string;
@@ -138,9 +139,8 @@ export function ChatView({
     tab === "global" || (tab === "clan" && clan !== null) || (tab === "private" && partner !== null);
 
   return (
-    <div className="mx-auto max-w-2xl space-y-4">
-      <h1 className="text-2xl font-bold text-gold">צ׳אט</h1>
-
+    <SceneBackdrop slug="tavern" icon="🍺" title="הטברנה" maxWidth="max-w-2xl">
+      <div className="space-y-4">
       <div className="flex gap-2">
         <button
           type="button"
@@ -205,6 +205,7 @@ export function ChatView({
       {!socket && (
         <p className="text-xs text-neutral-500">מתחבר לשרת הצ׳אט…</p>
       )}
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { ActionForm } from "./ActionForm";
 import {
   acceptInviteAction,
@@ -31,9 +32,8 @@ export function ClanLobby({
   const canAfford = myGold >= creationCost;
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
-      <h1 className="text-2xl font-bold text-gold">שבטים</h1>
-
+    <SceneBackdrop slug="keep" icon="🏰" title="אולם השבטים" maxWidth="max-w-3xl">
+      <div className="space-y-6">
       {invites.length > 0 && (
         <section>
           <h2 className="mb-2 text-lg font-semibold text-gold">הזמנות שקיבלת</h2>
@@ -99,6 +99,7 @@ export function ClanLobby({
           </ul>
         )}
       </section>
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

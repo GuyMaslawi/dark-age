@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 
 export type RankRow = {
   id: string;
@@ -33,9 +34,8 @@ export function RankingView({
   const rows = tab === "level" ? byLevel : byPvp;
 
   return (
-    <div className="mx-auto max-w-2xl space-y-5">
-      <h1 className="text-2xl font-bold text-gold">דירוג</h1>
-
+    <SceneBackdrop slug="throne" icon="👑" title="היכל הדירוג" maxWidth="max-w-2xl">
+      <div className="space-y-5">
       <div className="flex gap-2">
         {(
           [
@@ -84,6 +84,7 @@ export function RankingView({
           </div>
         ))}
       </div>
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

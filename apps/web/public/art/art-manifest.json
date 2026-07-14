@@ -1,0 +1,658 @@
+{
+  "style": "dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements",
+  "generatedFrom": "seed",
+  "count": 93,
+  "assets": [
+    {
+      "category": "location",
+      "slug": "misty-vale",
+      "path": "art/locations/misty-vale.png",
+      "size": "1600x900",
+      "prompt": "The Misty Vale: a green valley wrapped in permanent fog, gateway to the world, faint sunlight through mist, twisted trees. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "shadow-forest",
+      "path": "art/locations/shadow-forest.png",
+      "size": "1600x900",
+      "prompt": "The Shadow Forest: a dense dark forest where sunlight barely reaches, glowing eyes between the trunks, thick undergrowth. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "rot-marshes",
+      "path": "art/locations/rot-marshes.png",
+      "size": "1600x900",
+      "prompt": "The Rot Marshes: a fetid swamp of sinking mud, poisonous green mist, dead trees and bubbling water. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "fallen-mines",
+      "path": "art/locations/fallen-mines.png",
+      "size": "1600x900",
+      "prompt": "The Fallen Mines: abandoned mine tunnels dug too deep, broken supports, faint ominous glow from below, dust and rubble. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "ash-desert",
+      "path": "art/locations/ash-desert.png",
+      "size": "1600x900",
+      "prompt": "The Ash Desert: a scorched wasteland to the horizon, hot ash blowing on the wind over whitened bones. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "frost-ridge",
+      "path": "art/locations/frost-ridge.png",
+      "size": "1600x900",
+      "prompt": "The Frost Ridge: frozen jagged peaks, cutting wind and blowing snow, ice-blue light, only the strong survive. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "eternal-ruins",
+      "path": "art/locations/eternal-ruins.png",
+      "size": "1600x900",
+      "prompt": "The Eternal Ruins: remains of a forgotten ancient kingdom, broken columns and arches, ghostly haze, purple twilight. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "abyss-of-darkness",
+      "path": "art/locations/abyss-of-darkness.png",
+      "size": "1600x900",
+      "prompt": "The Abyss of Darkness: the deepest chasm in the world, living darkness rising from a bottomless rift, violet void glow. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "town",
+      "path": "art/locations/town.png",
+      "size": "1600x900",
+      "prompt": "The Home City: a medieval fantasy town square hub at dusk, torch-lit stone buildings around a plaza: a blacksmith forge, a market, a tavern, a keep and a gate to the wilds, cobblestones, warm glow. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "keep",
+      "path": "art/locations/keep.png",
+      "size": "1600x900",
+      "prompt": "The Keep: the great stone hall of a clan keep, banners, long table, cold blue light through tall windows. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "forge",
+      "path": "art/locations/forge.png",
+      "size": "1600x900",
+      "prompt": "The Forge: a medieval blacksmith forge interior, glowing furnace and molten metal, anvils, hanging tools and weapons, warm orange ember light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "market",
+      "path": "art/locations/market.png",
+      "size": "1600x900",
+      "prompt": "The Market: a bustling medieval fantasy market hall, wooden stalls with wares and weapons, hanging lanterns, warm golden light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "tavern",
+      "path": "art/locations/tavern.png",
+      "size": "1600x900",
+      "prompt": "The Tavern: a cozy warm medieval tavern interior, roaring fireplace, wooden tables and benches, barrels and mugs, amber firelight. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "throne",
+      "path": "art/locations/throne.png",
+      "size": "1600x900",
+      "prompt": "The Throne Hall: a grand throne hall of a dark kingdom, golden throne on a dais, tall columns, banners, dramatic purple and gold light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "location",
+      "slug": "arena",
+      "path": "art/locations/arena.png",
+      "size": "1600x900",
+      "prompt": "The Arena: a grim stone battle arena pit, blood-stained sand, torch sconces, dark spectator stands, ominous red light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "grove-rat",
+      "path": "art/monsters/grove-rat.png",
+      "size": "768x768",
+      "prompt": "a large feral grove rat, a level 1 monster in misty green valley. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "mist-sprite",
+      "path": "art/monsters/mist-sprite.png",
+      "size": "768x768",
+      "prompt": "an ethereal glowing mist sprite, a level 3 monster in misty green valley. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "young-boar",
+      "path": "art/monsters/young-boar.png",
+      "size": "768x768",
+      "prompt": "a young wild boar, a level 5 monster in misty green valley. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "shadow-wolf",
+      "path": "art/monsters/shadow-wolf.png",
+      "size": "768x768",
+      "prompt": "a black shadow wolf with glowing eyes, a level 6 monster in dark shadowed forest. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "creeping-vine",
+      "path": "art/monsters/creeping-vine.png",
+      "size": "768x768",
+      "prompt": "an animated creeping vine creature, a level 8 monster in dark shadowed forest. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "forest-lurker",
+      "path": "art/monsters/forest-lurker.png",
+      "size": "768x768",
+      "prompt": "a stealthy forest lurker beast, a level 9 monster in dark shadowed forest. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "bog-lurcher",
+      "path": "art/monsters/bog-lurcher.png",
+      "size": "768x768",
+      "prompt": "a hulking bog lurcher of mud and weeds, a level 10 monster in poisonous swamp. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "venom-toad",
+      "path": "art/monsters/venom-toad.png",
+      "size": "768x768",
+      "prompt": "a giant venomous toad, a level 12 monster in poisonous swamp. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "rot-fiend",
+      "path": "art/monsters/rot-fiend.png",
+      "size": "768x768",
+      "prompt": "a rotting swamp fiend, a level 14 monster in poisonous swamp. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "mine-crawler",
+      "path": "art/monsters/mine-crawler.png",
+      "size": "768x768",
+      "prompt": "a chitinous mine crawler insectoid, a level 15 monster in deep abandoned mine. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "stone-golem",
+      "path": "art/monsters/stone-golem.png",
+      "size": "768x768",
+      "prompt": "a massive stone golem, a level 18 monster in deep abandoned mine. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "deep-horror",
+      "path": "art/monsters/deep-horror.png",
+      "size": "768x768",
+      "prompt": "an eldritch deep horror with many eyes, a level 20 monster in deep abandoned mine. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "ash-jackal",
+      "path": "art/monsters/ash-jackal.png",
+      "size": "768x768",
+      "prompt": "a lean ash-colored jackal, a level 21 monster in scorched ash desert. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "cinder-wraith",
+      "path": "art/monsters/cinder-wraith.png",
+      "size": "768x768",
+      "prompt": "a burning cinder wraith of embers, a level 23 monster in scorched ash desert. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "sand-colossus",
+      "path": "art/monsters/sand-colossus.png",
+      "size": "768x768",
+      "prompt": "a towering sand and stone colossus, a level 26 monster in scorched ash desert. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "frost-wolf",
+      "path": "art/monsters/frost-wolf.png",
+      "size": "768x768",
+      "prompt": "a white frost wolf, a level 27 monster in frozen mountain ridge. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "ice-revenant",
+      "path": "art/monsters/ice-revenant.png",
+      "size": "768x768",
+      "prompt": "an undead ice revenant, a level 30 monster in frozen mountain ridge. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "ridge-tyrant",
+      "path": "art/monsters/ridge-tyrant.png",
+      "size": "768x768",
+      "prompt": "a brutal armored ridge tyrant, a level 33 monster in frozen mountain ridge. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "ruin-shade",
+      "path": "art/monsters/ruin-shade.png",
+      "size": "768x768",
+      "prompt": "a ghostly ruin shade, a level 34 monster in ancient haunted ruins. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "cursed-knight",
+      "path": "art/monsters/cursed-knight.png",
+      "size": "768x768",
+      "prompt": "a cursed undead knight in ancient armor, a level 37 monster in ancient haunted ruins. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "throne-guardian",
+      "path": "art/monsters/throne-guardian.png",
+      "size": "768x768",
+      "prompt": "a colossal throne guardian construct, a level 42 monster in ancient haunted ruins. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "void-spawn",
+      "path": "art/monsters/void-spawn.png",
+      "size": "768x768",
+      "prompt": "a writhing void spawn of dark tendrils, a level 43 monster in abyssal void. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "dark-devourer",
+      "path": "art/monsters/dark-devourer.png",
+      "size": "768x768",
+      "prompt": "an enormous dark devourer with a gaping maw, a level 48 monster in abyssal void. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "monster",
+      "slug": "the-nameless",
+      "path": "art/monsters/the-nameless.png",
+      "size": "768x768",
+      "prompt": "The Nameless, a titanic shapeless void god, a level 55 monster in abyssal void. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "rusty-dagger",
+      "path": "art/items/rusty-dagger.png",
+      "size": "512x512",
+      "prompt": "a plain rusty dagger, a common weapon game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "hunter-bow",
+      "path": "art/items/hunter-bow.png",
+      "size": "512x512",
+      "prompt": "a light wooden hunter's bow, a common weapon game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "iron-mace",
+      "path": "art/items/iron-mace.png",
+      "size": "512x512",
+      "prompt": "a heavy iron mace, a uncommon weapon game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "marsh-spear",
+      "path": "art/items/marsh-spear.png",
+      "size": "512x512",
+      "prompt": "a poison-tipped marsh spear, a uncommon weapon game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "miner-pick-blade",
+      "path": "art/items/miner-pick-blade.png",
+      "size": "512x512",
+      "prompt": "a miner's pick sharpened into a blade, a rare weapon game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "ash-cleaver",
+      "path": "art/items/ash-cleaver.png",
+      "size": "512x512",
+      "prompt": "a broad cleaver forged in desert fire, a rare weapon game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "frost-glaive",
+      "path": "art/items/frost-glaive.png",
+      "size": "512x512",
+      "prompt": "a frozen glaive with an icy blade, a epic weapon game inventory item icon, single object centered on a dark stone background, subtle epic colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "ruin-warblade",
+      "path": "art/items/ruin-warblade.png",
+      "size": "512x512",
+      "prompt": "an ancient knightly warblade, a epic weapon game inventory item icon, single object centered on a dark stone background, subtle epic colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "abyssal-reaver",
+      "path": "art/items/abyssal-reaver.png",
+      "size": "512x512",
+      "prompt": "a living abyssal reaver blade whispering in darkness, a legendary weapon game inventory item icon, single object centered on a dark stone background, subtle legendary colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "cracked-buckler",
+      "path": "art/items/cracked-buckler.png",
+      "size": "512x512",
+      "prompt": "a small cracked wooden buckler, a common shield game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "oak-shield",
+      "path": "art/items/oak-shield.png",
+      "size": "512x512",
+      "prompt": "an iron-rimmed oak shield, a uncommon shield game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "tower-shield",
+      "path": "art/items/tower-shield.png",
+      "size": "512x512",
+      "prompt": "a large iron tower shield, a rare shield game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "aegis-of-ruin",
+      "path": "art/items/aegis-of-ruin.png",
+      "size": "512x512",
+      "prompt": "a ceremonial aegis of a lost army, a epic shield game inventory item icon, single object centered on a dark stone background, subtle epic colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "leather-cap",
+      "path": "art/items/leather-cap.png",
+      "size": "512x512",
+      "prompt": "a simple leather cap, a common helmet game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "iron-helm",
+      "path": "art/items/iron-helm.png",
+      "size": "512x512",
+      "prompt": "a full iron helm with nose guard, a uncommon helmet game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "warden-helm",
+      "path": "art/items/warden-helm.png",
+      "size": "512x512",
+      "prompt": "an ornate warden's helm, a rare helmet game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "crown-of-frost",
+      "path": "art/items/crown-of-frost.png",
+      "size": "512x512",
+      "prompt": "a crown of never-melting ice, a epic helmet game inventory item icon, single object centered on a dark stone background, subtle epic colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "tattered-tunic",
+      "path": "art/items/tattered-tunic.png",
+      "size": "512x512",
+      "prompt": "a thin tattered cloth tunic, a common armor game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "leather-armor",
+      "path": "art/items/leather-armor.png",
+      "size": "512x512",
+      "prompt": "worked leather armor, a uncommon armor game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "chain-mail",
+      "path": "art/items/chain-mail.png",
+      "size": "512x512",
+      "prompt": "an iron chain mail hauberk, a rare armor game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "plate-of-ash",
+      "path": "art/items/plate-of-ash.png",
+      "size": "512x512",
+      "prompt": "blackened scorched plate armor, a epic armor game inventory item icon, single object centered on a dark stone background, subtle epic colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "abyssal-carapace",
+      "path": "art/items/abyssal-carapace.png",
+      "size": "512x512",
+      "prompt": "a living abyssal carapace armor, a legendary armor game inventory item icon, single object centered on a dark stone background, subtle legendary colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "cloth-pants",
+      "path": "art/items/cloth-pants.png",
+      "size": "512x512",
+      "prompt": "plain cloth pants, a common pants game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "leather-greaves",
+      "path": "art/items/leather-greaves.png",
+      "size": "512x512",
+      "prompt": "leather leg greaves, a uncommon pants game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "iron-greaves",
+      "path": "art/items/iron-greaves.png",
+      "size": "512x512",
+      "prompt": "heavy iron leg greaves, a rare pants game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "worn-gloves",
+      "path": "art/items/worn-gloves.png",
+      "size": "512x512",
+      "prompt": "worn leather gloves, a common gloves game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "gripping-gauntlets",
+      "path": "art/items/gripping-gauntlets.png",
+      "size": "512x512",
+      "prompt": "reinforced gripping gauntlets, a uncommon gloves game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "frostbite-grips",
+      "path": "art/items/frostbite-grips.png",
+      "size": "512x512",
+      "prompt": "frost-covered gauntlets, a rare gloves game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "cloth-shoes",
+      "path": "art/items/cloth-shoes.png",
+      "size": "512x512",
+      "prompt": "light soft cloth shoes, a common boots game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "traveler-boots",
+      "path": "art/items/traveler-boots.png",
+      "size": "512x512",
+      "prompt": "comfortable leather traveler's boots, a uncommon boots game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "warplate-boots",
+      "path": "art/items/warplate-boots.png",
+      "size": "512x512",
+      "prompt": "armored warplate boots, a rare boots game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "copper-band",
+      "path": "art/items/copper-band.png",
+      "size": "512x512",
+      "prompt": "a simple copper ring, a common ring game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "sage-ring",
+      "path": "art/items/sage-ring.png",
+      "size": "512x512",
+      "prompt": "a ring set with a pale sage stone, a uncommon ring game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "viper-ring",
+      "path": "art/items/viper-ring.png",
+      "size": "512x512",
+      "prompt": "a coiled serpent viper ring, a rare ring game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "titan-signet",
+      "path": "art/items/titan-signet.png",
+      "size": "512x512",
+      "prompt": "a heavy titan signet ring radiating power, a epic ring game inventory item icon, single object centered on a dark stone background, subtle epic colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "ring-of-the-void",
+      "path": "art/items/ring-of-the-void.png",
+      "size": "512x512",
+      "prompt": "a dark ring of the void that swallows light, a legendary ring game inventory item icon, single object centered on a dark stone background, subtle legendary colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "wolf-pelt",
+      "path": "art/items/wolf-pelt.png",
+      "size": "512x512",
+      "prompt": "a rolled wolf pelt crafting material, a common material game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "iron-ore",
+      "path": "art/items/iron-ore.png",
+      "size": "512x512",
+      "prompt": "a raw chunk of iron ore, a common material game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "frost-crystal",
+      "path": "art/items/frost-crystal.png",
+      "size": "512x512",
+      "prompt": "a glowing never-melting frost crystal, a rare material game inventory item icon, single object centered on a dark stone background, subtle rare colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "shadow-essence",
+      "path": "art/items/shadow-essence.png",
+      "size": "512x512",
+      "prompt": "condensed dark shadow essence in a vial, a epic material game inventory item icon, single object centered on a dark stone background, subtle epic colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "minor-healing-draught",
+      "path": "art/items/minor-healing-draught.png",
+      "size": "512x512",
+      "prompt": "a small red healing potion, a common consumable game inventory item icon, single object centered on a dark stone background, subtle common colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "item",
+      "slug": "greater-healing-draught",
+      "path": "art/items/greater-healing-draught.png",
+      "size": "512x512",
+      "prompt": "a large ornate red healing potion, a uncommon consumable game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "ember-male",
+      "path": "art/portraits/ember-male.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a male hooded dark-fantasy adventurer, gold-accented armor and cloak (gold ember), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "ember-female",
+      "path": "art/portraits/ember-female.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a female hooded dark-fantasy adventurer, gold-accented armor and cloak (gold ember), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "crimson-male",
+      "path": "art/portraits/crimson-male.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a male hooded dark-fantasy adventurer, crimson-accented armor and cloak (crimson red), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "crimson-female",
+      "path": "art/portraits/crimson-female.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a female hooded dark-fantasy adventurer, crimson-accented armor and cloak (crimson red), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "verdant-male",
+      "path": "art/portraits/verdant-male.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a male hooded dark-fantasy adventurer, green-accented armor and cloak (moss green), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "verdant-female",
+      "path": "art/portraits/verdant-female.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a female hooded dark-fantasy adventurer, green-accented armor and cloak (moss green), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "azure-male",
+      "path": "art/portraits/azure-male.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a male hooded dark-fantasy adventurer, blue-accented armor and cloak (azure blue), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "azure-female",
+      "path": "art/portraits/azure-female.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a female hooded dark-fantasy adventurer, blue-accented armor and cloak (azure blue), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "violet-male",
+      "path": "art/portraits/violet-male.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a male hooded dark-fantasy adventurer, purple-accented armor and cloak (violet purple), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "violet-female",
+      "path": "art/portraits/violet-female.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a female hooded dark-fantasy adventurer, purple-accented armor and cloak (violet purple), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "ash-male",
+      "path": "art/portraits/ash-male.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a male hooded dark-fantasy adventurer, gray-accented armor and cloak (ashen gray), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    },
+    {
+      "category": "portrait",
+      "slug": "ash-female",
+      "path": "art/portraits/ash-female.png",
+      "size": "768x768",
+      "prompt": "portrait bust of a female hooded dark-fantasy adventurer, gray-accented armor and cloak (ashen gray), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements"
+    }
+  ]
+}

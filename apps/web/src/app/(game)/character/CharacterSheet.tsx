@@ -1,6 +1,7 @@
 import type { Character, Location } from "@kingdom/db";
 import { xpProgress } from "@kingdom/game-engine";
-import { Avatar } from "@/components/Avatar";
+import { Portrait } from "@/components/art/Portrait";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { AllocatePanel } from "./AllocatePanel";
 
 type CharacterWithLocation = Character & { location: Location };
@@ -25,9 +26,15 @@ export function CharacterSheet({ character }: { character: CharacterWithLocation
   ];
 
   return (
-    <div className="mx-auto max-w-3xl space-y-5">
+    <SceneBackdrop slug="town" icon="⚔️" title="הדמות שלך" maxWidth="max-w-3xl">
+      <div className="space-y-5">
       <div className="panel flex flex-col gap-5 p-5 sm:flex-row sm:items-center">
-        <Avatar avatarKey={character.avatarKey} gender={character.gender} size={112} />
+        <Portrait
+          avatarKey={character.avatarKey}
+          gender={character.gender}
+          name={character.name}
+          size={112}
+        />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h1 className="text-2xl font-bold text-gold">{character.name}</h1>
@@ -71,6 +78,7 @@ export function CharacterSheet({ character }: { character: CharacterWithLocation
           <StatLine label="הפסדי PvP" value={character.pvpLosses} />
         </div>
       </div>
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ClanRole } from "@kingdom/db";
+import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { ActionForm } from "./ActionForm";
 import {
   depositTreasuryAction,
@@ -44,7 +45,8 @@ export function ClanHome({
   const isOfficer = myRole === ClanRole.OFFICER || isLeader;
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <SceneBackdrop slug="keep" icon="🏰" title="הטירה" maxWidth="max-w-3xl">
+      <div className="space-y-6">
       <div className="panel p-5">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-gold">
@@ -152,6 +154,7 @@ export function ClanHome({
           />
         )}
       </section>
-    </div>
+      </div>
+    </SceneBackdrop>
   );
 }
