@@ -224,4 +224,38 @@ ${table(byCat("portrait"))}
 `;
 
 writeFileSync(join(artDir, "README.md"), readme);
-console.log(`Wrote ${assets.length} assets to art-manifest.json and README.md`);
+
+const catTitle = {
+  location: "LOCATIONS & SCENES  →  save in  art/locations/  (landscape, ~1600x900)",
+  monster: "MONSTERS  →  save in  art/monsters/  (square, ~768x768)",
+  item: "ITEMS  →  save in  art/items/  (square, ~512x512)",
+  portrait: "CHARACTER PORTRAITS  →  save in  art/portraits/  (square, ~768x768)",
+};
+
+const block = (rows) =>
+  rows
+    .map((a) => `[${a.path}]\n${a.prompt}\n`)
+    .join("\n");
+
+const prompts = `DARK AGE — ART PROMPTS (copy-paste)
+${"=".repeat(64)}
+${assets.length} images. The global style is already baked into every prompt.
+For each one: paste the prompt into your image tool, then save the result
+using the filename in [brackets] above it. Generated files override the
+built-in SVG placeholders automatically — no code changes.
+
+TIP for consistency: generate ONE image first, then reuse it as a
+"style reference" (Midjourney --sref, or the "style reference" upload in
+Leonardo / ImageFX) for all the rest so the whole set matches.
+
+${Object.keys(catTitle)
+  .map(
+    (cat) =>
+      `\n${"═".repeat(64)}\n  ${catTitle[cat]}\n${"═".repeat(64)}\n\n${block(byCat(cat))}`,
+  )
+  .join("")}`;
+
+writeFileSync(join(artDir, "prompts.txt"), prompts);
+console.log(
+  `Wrote ${assets.length} assets to art-manifest.json, README.md, and prompts.txt`,
+);
