@@ -25,6 +25,8 @@ function Bar({ label, current, max, colorClass }: BarProps) {
   );
 }
 
+import { xpProgress } from "@kingdom/game-engine";
+
 export type CharacterSummary = {
   name: string;
   level: number;
@@ -38,6 +40,7 @@ export type CharacterSummary = {
 };
 
 export function ResourceBars({ character }: { character: CharacterSummary }) {
+  const xp = xpProgress(character);
   return (
     <div className="flex flex-wrap items-center gap-4">
       <div className="flex items-baseline gap-2">
@@ -57,6 +60,12 @@ export function ResourceBars({ character }: { character: CharacterSummary }) {
         current={character.energy}
         max={character.maxEnergy}
         colorClass="bg-emerald-600"
+      />
+      <Bar
+        label="ניסיון"
+        current={xp.current}
+        max={xp.required}
+        colorClass="bg-gold"
       />
       <div className="flex items-center gap-1 text-sm text-gold">
         <span aria-hidden>🪙</span>

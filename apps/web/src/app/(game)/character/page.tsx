@@ -1,12 +1,14 @@
-import { PagePlaceholder } from "@/components/PagePlaceholder";
+import { requireUser, getCurrentCharacter } from "@/lib/session";
+import { CreateCharacterForm } from "./CreateCharacterForm";
+import { CharacterSheet } from "./CharacterSheet";
 
-export default function CharacterPage() {
-  return (
-    <PagePlaceholder
-      icon="⚔️"
-      title="הדמות שלך"
-      description="כאן תיצור את הדמות שלך, תחלק נקודות פרמטרים ותעקוב אחר ההתקדמות שלך בעולם."
-      phase="נבנה בפאזה 1"
-    />
-  );
+export default async function CharacterPage() {
+  const user = await requireUser();
+  const character = await getCurrentCharacter(user.id);
+
+  if (!character) {
+    return <CreateCharacterForm />;
+  }
+
+  return <CharacterSheet character={character} />;
 }
