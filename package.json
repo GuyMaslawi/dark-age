@@ -1,0 +1,24 @@
+{
+  "name": "kingdom-rpg",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm --filter @kingdom/web dev",
+    "build": "pnpm --filter @kingdom/db generate && pnpm --filter @kingdom/game-engine build && pnpm --filter @kingdom/web build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "db:generate": "pnpm --filter @kingdom/db generate",
+    "db:migrate": "pnpm --filter @kingdom/db migrate",
+    "db:seed": "pnpm --filter @kingdom/db seed",
+    "db:reset": "pnpm --filter @kingdom/db reset",
+    "worker": "pnpm --filter @kingdom/worker start"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "@types/node": "22.7.5"
+  }
+}

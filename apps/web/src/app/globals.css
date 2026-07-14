@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: #0a0a0a;
+  color: #e6e2d6;
+}
+
+body {
+  min-height: 100dvh;
+  background-image:
+    radial-gradient(circle at 15% -10%, rgba(201, 162, 39, 0.06), transparent 40%),
+    radial-gradient(circle at 100% 0%, rgba(139, 30, 30, 0.05), transparent 35%);
+}
+
+::selection {
+  background-color: rgba(201, 162, 39, 0.3);
+}
+
+@layer components {
+  .panel {
+    @apply rounded-lg border border-void-edge bg-void-panel/70 backdrop-blur;
+  }
+
+  .btn-gold {
+    @apply rounded-md bg-gold px-4 py-2 font-semibold text-void transition-colors hover:bg-gold-bright disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply rounded-md border border-void-edge px-4 py-2 text-gold transition-colors hover:border-gold/50 hover:text-gold-bright;
+  }
+
+  .field {
+    @apply w-full rounded-md border border-void-edge bg-void-soft px-3 py-2 text-right outline-none transition-colors focus:border-gold/60;
+  }
+}

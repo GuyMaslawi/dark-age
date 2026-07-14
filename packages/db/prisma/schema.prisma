@@ -1,0 +1,343 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum Rarity {
+  COMMON
+  UNCOMMON
+  RARE
+  EPIC
+  LEGENDARY
+}
+
+enum EquipmentSlot {
+  WEAPON
+  SHIELD
+  HELMET
+  ARMOR
+  PANTS
+  GLOVES
+  BOOTS
+  RING_ONE
+  RING_TWO
+}
+
+enum ItemType {
+  WEAPON
+  SHIELD
+  HELMET
+  ARMOR
+  PANTS
+  GLOVES
+  BOOTS
+  RING
+  MATERIAL
+  CONSUMABLE
+}
+
+enum BattleType {
+  PVE
+  PVP
+}
+
+enum BattleResult {
+  ATTACKER_WIN
+  DEFENDER_WIN
+  DRAW
+}
+
+enum ClanRole {
+  LEADER
+  OFFICER
+  MEMBER
+}
+
+enum ProfessionType {
+  FISHING
+  FARMING
+  MINING
+}
+
+enum ProfessionJobStatus {
+  ACTIVE
+  COMPLETED
+  CLAIMED
+}
+
+enum MarketListingStatus {
+  ACTIVE
+  SOLD
+  CANCELLED
+}
+
+enum MessageChannel {
+  GLOBAL
+  CLAN
+  PRIVATE
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  character    Character?
+}
+
+model Character {
+  id        String @id @default(cuid())
+  userId    String @unique
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String @unique
+  gender    Gender
+  avatarKey String
+
+  strength  Int @default(5)
+  wisdom    Int @default(5)
+  agility   Int @default(5)
+  endurance Int @default(5)
+
+  level         Int @default(1)
+  subLevel      Int @default(0)
+  xp            Int @default(0)
+  unspentPoints Int @default(0)
+
+  hp        Int @default(100)
+  maxHp     Int @default(100)
+  energy    Int @default(100)
+  maxEnergy Int @default(100)
+  gold      Int @default(0)
+
+  pvpWins   Int @default(0)
+  pvpLosses Int @default(0)
+  pveWins   Int @default(0)
+
+  locationId String
+  location   Location @relation(fields: [locationId], references: [id])
+
+  hpUpdatedAt       DateTime  @default(now())
+  energyUpdatedAt   DateTime  @default(now())
+  pvpProtectedUntil DateTime?
+  lastPvpAttackAt   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  inventory        InventoryItem[]
+  attackerBattles  Battle[]        @relation("AttackerBattles")
+  defenderBattles  Battle[]        @relation("DefenderBattles")
+  clanMembership   ClanMember?
+  marketListings   MarketListing[] @relation("SellerListings")
+  professionJobs   ProfessionJob[]
+  sentMessages     Message[]       @relation("SentMessages")
+  receivedMessages Message[]       @relation("ReceivedMessages")
+
+  @@index([level, xp])
+  @@index([pvpWins])
+  @@index([locationId])
+}
+
+model Location {
+  id          String @id @default(cuid())
+  slug        String @unique
+  name        String
+  description String
+  minLevel    Int
+  maxLevel    Int
+  energyCost  Int
+  orderIndex  Int
+
+  monsters   Monster[]
+  characters Character[]
+
+  @@index([orderIndex])
+}
+
+model Monster {
+  id         String @id @default(cuid())
+  slug       String @unique
+  name       String
+  level      Int
+  strength   Int
+  wisdom     Int
+  agility    Int
+  endurance  Int
+  maxHp      Int
+  weaponBase Int
+  armorValue Int
+  xpReward   Int
+  goldMin    Int
+  goldMax    Int
+
+  locationId String
+  location   Location @relation(fields: [locationId], references: [id])
+
+  lootEntries LootEntry[]
+
+  @@index([locationId])
+  @@index([level])
+}
+
+model Item {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  description      String
+  type             ItemType
+  rarity           Rarity
+  levelRequirement Int      @default(1)
+
+  strengthBonus  Int @default(0)
+  wisdomBonus    Int @default(0)
+  agilityBonus   Int @default(0)
+  enduranceBonus Int @default(0)
+  weaponBase     Int @default(0)
+  armorValue     Int @default(0)
+
+  basePrice Int
+
+  inventoryItems InventoryItem[]
+  lootEntries    LootEntry[]
+  marketListings MarketListing[]
+
+  @@index([type])
+  @@index([rarity])
+}
+
+model LootEntry {
+  id        String  @id @default(cuid())
+  monsterId String
+  monster   Monster @relation(fields: [monsterId], references: [id], onDelete: Cascade)
+  itemId    String
+  item      Item    @relation(fields: [itemId], references: [id])
+  weight    Int
+
+  @@index([monsterId])
+}
+
+model InventoryItem {
+  id           String         @id @default(cuid())
+  characterId  String
+  character    Character      @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  itemId       String
+  item         Item           @relation(fields: [itemId], references: [id])
+  equippedSlot EquipmentSlot?
+  quantity     Int            @default(1)
+  createdAt    DateTime       @default(now())
+
+  @@unique([characterId, equippedSlot])
+  @@index([characterId])
+}
+
+model Battle {
+  id         String       @id @default(cuid())
+  type       BattleType
+  result     BattleResult
+  attackerId String
+  attacker   Character    @relation("AttackerBattles", fields: [attackerId], references: [id])
+  defenderId String?
+  defender   Character?   @relation("DefenderBattles", fields: [defenderId], references: [id])
+  monsterId  String?
+  log        Json
+  xpGained   Int          @default(0)
+  goldGained Int          @default(0)
+  createdAt  DateTime     @default(now())
+
+  @@index([attackerId])
+  @@index([defenderId])
+  @@index([createdAt])
+}
+
+model MarketListing {
+  id        String              @id @default(cuid())
+  sellerId  String
+  seller    Character           @relation("SellerListings", fields: [sellerId], references: [id])
+  itemId    String
+  item      Item                @relation(fields: [itemId], references: [id])
+  price     Int
+  status    MarketListingStatus @default(ACTIVE)
+  createdAt DateTime            @default(now())
+  soldAt    DateTime?
+
+  @@index([status, price])
+  @@index([itemId])
+}
+
+model Clan {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  tag         String       @unique
+  description String
+  treasury    Int          @default(0)
+  createdAt   DateTime     @default(now())
+  members     ClanMember[]
+
+  @@index([treasury])
+}
+
+model ClanMember {
+  id          String    @id @default(cuid())
+  clanId      String
+  clan        Clan      @relation(fields: [clanId], references: [id], onDelete: Cascade)
+  characterId String    @unique
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  role        ClanRole  @default(MEMBER)
+  joinedAt    DateTime  @default(now())
+
+  @@index([clanId])
+}
+
+model ProfessionJob {
+  id          String              @id @default(cuid())
+  characterId String
+  character   Character           @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  type        ProfessionType
+  status      ProfessionJobStatus @default(ACTIVE)
+  startedAt   DateTime            @default(now())
+  finishesAt  DateTime
+  goldReward  Int
+  createdAt   DateTime            @default(now())
+
+  @@index([characterId, status])
+  @@index([status, finishesAt])
+}
+
+model Message {
+  id          String         @id @default(cuid())
+  channel     MessageChannel
+  senderId    String
+  sender      Character      @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  recipientId String?
+  recipient   Character?     @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
+  clanId      String?
+  body        String
+  createdAt   DateTime       @default(now())
+
+  @@index([channel, createdAt])
+  @@index([recipientId, createdAt])
+  @@index([clanId, createdAt])
+}
+
+model RankingSnapshot {
+  id            String   @id @default(cuid())
+  characterId   String
+  characterName String
+  level         Int
+  xp            Int
+  pvpWins       Int
+  rank          Int
+  capturedAt    DateTime @default(now())
+
+  @@index([capturedAt, rank])
+}

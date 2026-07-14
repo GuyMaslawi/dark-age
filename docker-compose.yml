@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: kingdom-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kingdom
+      POSTGRES_PASSWORD: kingdom
+      POSTGRES_DB: kingdom_rpg
+    ports:
+      - "5433:5432"
+    volumes:
+      - kingdom_pgdata:/var/lib/postgresql/data
+
+volumes:
+  kingdom_pgdata:
