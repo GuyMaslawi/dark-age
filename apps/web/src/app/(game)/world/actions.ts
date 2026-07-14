@@ -6,22 +6,15 @@ import { prisma } from "@kingdom/db";
 import {
   ENERGY_BATTLE_COST,
   ENERGY_PVP_COST,
-  PVP_PROTECTION_MINUTES,
-  createRng,
   randomSeed,
   pveXpReward,
   pvpXpReward,
-  rollGold,
-  rollLoot,
-  runBattle,
   withinPvpRange,
 } from "@kingdom/game-engine";
 import { requireUser } from "@/lib/session";
 import { combatantFromCharacter, combatantFromMonster } from "@/lib/combat";
-import { computeCharacterUpdate } from "@/lib/progression";
 import { syncRegen } from "@/lib/regen";
-import { notifyPlayer } from "@/lib/socket";
-import type { BattleLogData } from "@/lib/battleLog";
+import type { FightState, FighterMeta } from "@/lib/fight";
 
 export type WorldActionState = {
   error: string | null;
@@ -60,9 +53,8 @@ export async function attackMonsterAction(
   const seed = randomSeed();
   const now = new Date();
 
-  let battleId = "";
   try {
-    battleId = await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx) => {
       const character = await tx.character.findUnique({
         where: { userId: user.id },
         include: {
@@ -84,98 +76,68 @@ export async function attackMonsterAction(
       if (!monster) throw new Error("NO_MONSTER");
       if (monster.locationId !== character.locationId) throw new Error("WRONG_LOCATION");
 
-      const rng = createRng(seed);
-      const outcome = runBattle(
-        combatantFromCharacter(character, character.inventory),
-        combatantFromMonster(monster),
-        rng,
-      );
-      const won = outcome.winner === "A";
-      const draw = outcome.winner === "DRAW";
-
-      const xpGained = pveXpReward(monster.xpReward, won);
-      const goldGained = won ? rollGold(monster.goldMin, monster.goldMax, rng) : 0;
-      const lootItemId = won
-        ? rollLoot(
-            monster.lootEntries.map((entry) => ({
-              itemId: entry.itemId,
-              weight: entry.weight,
-            })),
-            rng,
-          )
-        : null;
-
-      const update = computeCharacterUpdate(character, {
-        xpGained,
-        goldGained,
-        won,
-        draw,
-        isPvp: false,
-        postBattleHp: outcome.finalHpA,
+      await tx.character.update({
+        where: { id: character.id },
+        data: {
+          energy: { decrement: ENERGY_BATTLE_COST },
+          energyUpdatedAt: now,
+        },
       });
-      update.data.energy = { decrement: ENERGY_BATTLE_COST };
-      update.data.hpUpdatedAt = now;
-      update.data.energyUpdatedAt = now;
 
-      await tx.character.update({ where: { id: character.id }, data: update.data });
-
-      let lootName: string | null = null;
-      if (lootItemId) {
-        const item = await tx.item.findUnique({ where: { id: lootItemId } });
-        if (item) {
-          lootName = item.name;
-          await tx.inventoryItem.create({
-            data: { characterId: character.id, itemId: item.id, quantity: 1 },
-          });
-        }
-      }
-
-      const log: BattleLogData = {
-        version: 1,
-        attacker: {
-          name: character.name,
-          startHp: Math.max(1, character.hp),
-          avatarKey: character.avatarKey,
-          gender: character.gender,
-          level: character.level,
-          kind: "character",
-        },
-        defender: {
-          name: monster.name,
-          startHp: monster.maxHp,
-          avatarKey: null,
-          gender: null,
-          level: monster.level,
-          kind: "monster",
-          slug: monster.slug,
-        },
-        turns: outcome.turns,
-        winner: outcome.winner,
-        finalHpA: outcome.finalHpA,
-        finalHpB: outcome.finalHpB,
-        rewards: {
-          won,
-          draw,
-          xpGained,
-          goldGained,
-          leveledUp: update.leveledUp,
-          newLevel: update.newLevel,
-          lootName,
-        },
+      const a = combatantFromCharacter(character, character.inventory);
+      const b = combatantFromMonster(monster);
+      const aMeta: FighterMeta = {
+        name: character.name,
+        level: character.level,
+        kind: "character",
+        avatarKey: character.avatarKey,
+        gender: character.gender,
+        slug: null,
+      };
+      const bMeta: FighterMeta = {
+        name: monster.name,
+        level: monster.level,
+        kind: "monster",
+        avatarKey: null,
+        gender: null,
+        slug: monster.slug,
       };
 
-      const battle = await tx.battle.create({
-        data: {
-          type: "PVE",
-          result: won ? "ATTACKER_WIN" : draw ? "DRAW" : "DEFENDER_WIN",
-          attackerId: character.id,
-          monsterId: monster.id,
-          log: log as unknown as object,
-          xpGained,
-          goldGained,
+      const state: FightState = {
+        version: 1,
+        type: "PVE",
+        seed,
+        round: 1,
+        a,
+        b,
+        hpA: a.maxHp,
+        hpB: b.maxHp,
+        barMaxA: character.maxHp,
+        barMaxB: monster.maxHp,
+        aMeta,
+        bMeta,
+        monsterId: monster.id,
+        defenderId: null,
+        defenderLevel: null,
+        reward: {
+          xpWin: pveXpReward(monster.xpReward, true),
+          goldMin: monster.goldMin,
+          goldMax: monster.goldMax,
+          loot: monster.lootEntries.map((entry) => ({
+            itemId: entry.itemId,
+            weight: entry.weight,
+          })),
         },
+        log: [],
+        over: false,
+        winner: null,
+      };
+
+      await tx.combatSession.upsert({
+        where: { characterId: character.id },
+        create: { characterId: character.id, state: state as unknown as object },
+        update: { state: state as unknown as object },
       });
-      return battle.id;
     });
   } catch (error) {
     if (error instanceof Error && DOMAIN_ERRORS[error.message]) {
@@ -185,7 +147,7 @@ export async function attackMonsterAction(
   }
 
   revalidatePath("/", "layout");
-  redirect(`/battles/${battleId}`);
+  redirect("/fight");
 }
 
 export async function attackPlayerAction(
@@ -197,11 +159,8 @@ export async function attackPlayerAction(
   const seed = randomSeed();
   const now = new Date();
 
-  let battleId = "";
-  let notice: { defenderId: string; attackerName: string; attackerWon: boolean } | null =
-    null;
   try {
-    battleId = await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx) => {
       const attacker = await tx.character.findUnique({
         where: { userId: user.id },
         include: EQUIPPED_INCLUDE,
@@ -224,102 +183,66 @@ export async function attackPlayerAction(
       }
       await syncRegen(tx, defender, now);
 
-      const rng = createRng(seed);
-      const outcome = runBattle(
-        combatantFromCharacter(attacker, attacker.inventory),
-        combatantFromCharacter(defender, defender.inventory),
-        rng,
-      );
-      const attackerWon = outcome.winner === "A";
-      const defenderWon = outcome.winner === "B";
-      const draw = outcome.winner === "DRAW";
-
-      const xpAttacker = pvpXpReward(defender.level, attackerWon);
-      const xpDefender = pvpXpReward(attacker.level, defenderWon);
-      const protectUntil = new Date(now.getTime() + PVP_PROTECTION_MINUTES * 60000);
-
-      const attackerUpdate = computeCharacterUpdate(attacker, {
-        xpGained: xpAttacker,
-        goldGained: 0,
-        won: attackerWon,
-        draw,
-        isPvp: true,
-        postBattleHp: outcome.finalHpA,
-      });
-      attackerUpdate.data.energy = { decrement: ENERGY_PVP_COST };
-      attackerUpdate.data.lastPvpAttackAt = now;
-      attackerUpdate.data.hpUpdatedAt = now;
-      attackerUpdate.data.energyUpdatedAt = now;
-      if (defenderWon) {
-        attackerUpdate.data.pvpProtectedUntil = protectUntil;
-      }
-
-      const defenderUpdate = computeCharacterUpdate(defender, {
-        xpGained: xpDefender,
-        goldGained: 0,
-        won: defenderWon,
-        draw,
-        isPvp: true,
-        postBattleHp: outcome.finalHpB,
-      });
-      defenderUpdate.data.hpUpdatedAt = now;
-      if (attackerWon) {
-        defenderUpdate.data.pvpProtectedUntil = protectUntil;
-      }
-
-      await tx.character.update({ where: { id: attacker.id }, data: attackerUpdate.data });
-      await tx.character.update({ where: { id: defender.id }, data: defenderUpdate.data });
-
-      const log: BattleLogData = {
-        version: 1,
-        attacker: {
-          name: attacker.name,
-          startHp: Math.max(1, attacker.hp),
-          avatarKey: attacker.avatarKey,
-          gender: attacker.gender,
-          level: attacker.level,
-          kind: "character",
-        },
-        defender: {
-          name: defender.name,
-          startHp: Math.max(1, defender.hp),
-          avatarKey: defender.avatarKey,
-          gender: defender.gender,
-          level: defender.level,
-          kind: "character",
-        },
-        turns: outcome.turns,
-        winner: outcome.winner,
-        finalHpA: outcome.finalHpA,
-        finalHpB: outcome.finalHpB,
-        rewards: {
-          won: attackerWon,
-          draw,
-          xpGained: xpAttacker,
-          goldGained: 0,
-          leveledUp: attackerUpdate.leveledUp,
-          newLevel: attackerUpdate.newLevel,
-          lootName: null,
-        },
-      };
-
-      const battle = await tx.battle.create({
+      await tx.character.update({
+        where: { id: attacker.id },
         data: {
-          type: "PVP",
-          result: attackerWon ? "ATTACKER_WIN" : draw ? "DRAW" : "DEFENDER_WIN",
-          attackerId: attacker.id,
-          defenderId: defender.id,
-          log: log as unknown as object,
-          xpGained: xpAttacker,
-          goldGained: 0,
+          energy: { decrement: ENERGY_PVP_COST },
+          energyUpdatedAt: now,
+          lastPvpAttackAt: now,
         },
       });
-      notice = {
-        defenderId: defender.id,
-        attackerName: attacker.name,
-        attackerWon,
+
+      const a = combatantFromCharacter(attacker, attacker.inventory);
+      const b = combatantFromCharacter(defender, defender.inventory);
+      const aMeta: FighterMeta = {
+        name: attacker.name,
+        level: attacker.level,
+        kind: "character",
+        avatarKey: attacker.avatarKey,
+        gender: attacker.gender,
+        slug: null,
       };
-      return battle.id;
+      const bMeta: FighterMeta = {
+        name: defender.name,
+        level: defender.level,
+        kind: "character",
+        avatarKey: defender.avatarKey,
+        gender: defender.gender,
+        slug: null,
+      };
+
+      const state: FightState = {
+        version: 1,
+        type: "PVP",
+        seed,
+        round: 1,
+        a,
+        b,
+        hpA: a.maxHp,
+        hpB: b.maxHp,
+        barMaxA: attacker.maxHp,
+        barMaxB: defender.maxHp,
+        aMeta,
+        bMeta,
+        monsterId: null,
+        defenderId: defender.id,
+        defenderLevel: defender.level,
+        reward: {
+          xpWin: pvpXpReward(defender.level, true),
+          goldMin: 0,
+          goldMax: 0,
+          loot: [],
+        },
+        log: [],
+        over: false,
+        winner: null,
+      };
+
+      await tx.combatSession.upsert({
+        where: { characterId: attacker.id },
+        create: { characterId: attacker.id, state: state as unknown as object },
+        update: { state: state as unknown as object },
+      });
     });
   } catch (error) {
     if (error instanceof Error && DOMAIN_ERRORS[error.message]) {
@@ -328,24 +251,8 @@ export async function attackPlayerAction(
     throw error;
   }
 
-  if (notice) {
-    const attacked = notice as {
-      defenderId: string;
-      attackerName: string;
-      attackerWon: boolean;
-    };
-    await notifyPlayer(attacked.defenderId, {
-      kind: "ATTACKED",
-      title: "הותקפת!",
-      body: attacked.attackerWon
-        ? `${attacked.attackerName} תקף אותך וניצח`
-        : `${attacked.attackerName} תקף אותך — הגנת בהצלחה`,
-      createdAt: now.toISOString(),
-    });
-  }
-
   revalidatePath("/", "layout");
-  redirect(`/battles/${battleId}`);
+  redirect("/fight");
 }
 
 export async function travelAction(

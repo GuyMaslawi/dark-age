@@ -1,6 +1,7 @@
 import type { Prisma } from "@kingdom/db";
 import {
   applyRegen,
+  hpRegenPerTick,
   HP_REGEN_INTERVAL_MS,
   ENERGY_REGEN_INTERVAL_MS,
 } from "@kingdom/game-engine";
@@ -25,7 +26,13 @@ export type RegenState = {
 
 export function computeRegen(source: RegenSource, now: Date): RegenState {
   const hpElapsed = now.getTime() - source.hpUpdatedAt.getTime();
-  const hpResult = applyRegen(source.hp, source.maxHp, hpElapsed, HP_REGEN_INTERVAL_MS);
+  const hpResult = applyRegen(
+    source.hp,
+    source.maxHp,
+    hpElapsed,
+    HP_REGEN_INTERVAL_MS,
+    hpRegenPerTick(source.maxHp),
+  );
   const energyElapsed = now.getTime() - source.energyUpdatedAt.getTime();
   const energyResult = applyRegen(
     source.energy,

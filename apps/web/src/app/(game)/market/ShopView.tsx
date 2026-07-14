@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import type { ItemType, Rarity } from "@kingdom/db";
-import { ItemCard, type ItemStats } from "@/components/ItemCard";
+import { ItemCard, type ItemStats, type ItemRequirements } from "@/components/ItemCard";
 import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { rarityMeta } from "@/lib/rarity";
 import {
@@ -25,6 +25,8 @@ export type ShopItemView = {
   slug: string;
   levelRequirement: number;
   price: number;
+  requirements: ItemRequirements;
+  unmetReqs: string[];
   stats: ItemStats;
 };
 
@@ -36,6 +38,8 @@ export type SellItemView = {
   slug: string;
   levelRequirement: number;
   sellPrice: number;
+  requirements: ItemRequirements;
+  unmetReqs: string[];
   stats: ItemStats;
 };
 
@@ -48,6 +52,8 @@ export type ListingView = {
   levelRequirement: number;
   price: number;
   sellerName: string;
+  requirements: ItemRequirements;
+  unmetReqs: string[];
   stats: ItemStats;
 };
 
@@ -193,6 +199,8 @@ export function ShopView({
               slug={item.slug}
               levelRequirement={item.levelRequirement}
               stats={item.stats}
+              requirements={item.requirements}
+              unmetReqs={item.unmetReqs}
               description={item.description}
             >
               <div className="flex items-center gap-2">
@@ -218,6 +226,8 @@ export function ShopView({
                 slug={item.slug}
                 levelRequirement={item.levelRequirement}
                 stats={item.stats}
+                requirements={item.requirements}
+                unmetReqs={item.unmetReqs}
               >
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-gold">🪙 {item.sellPrice}</span>
@@ -299,6 +309,8 @@ export function ShopView({
                     slug={listing.slug}
                     levelRequirement={listing.levelRequirement}
                     stats={listing.stats}
+                    requirements={listing.requirements}
+                    unmetReqs={listing.unmetReqs}
                     description={`מוכר: ${listing.sellerName}`}
                   >
                     <div className="flex items-center gap-2">

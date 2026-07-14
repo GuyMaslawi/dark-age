@@ -1,5 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { aggregateEquipment, effectiveStats, EMPTY_BONUS } from "./equipment";
+import {
+  aggregateEquipment,
+  effectiveStats,
+  EMPTY_BONUS,
+  deriveItemRequirements,
+  checkItemRequirements,
+  type ItemLike,
+} from "./equipment";
 import { UNARMED_WEAPON_BASE } from "./formulas";
 
 const sword = { ...EMPTY_BONUS, strength: 3, weaponBase: 12 };
@@ -39,5 +46,74 @@ describe("effectiveStats", () => {
     expect(stats.endurance).toBe(13);
     expect(stats.weaponBase).toBe(UNARMED_WEAPON_BASE + 12);
     expect(stats.armorValue).toBe(7);
+  });
+});
+
+const swordItem: ItemLike = {
+  type: "WEAPON",
+  rarity: "RARE",
+  levelRequirement: 10,
+  strengthBonus: 6,
+  wisdomBonus: 0,
+  agilityBonus: 3,
+  enduranceBonus: 0,
+  weaponBase: 20,
+  armorValue: 0,
+};
+
+const materialItem: ItemLike = {
+  type: "MATERIAL",
+  rarity: "COMMON",
+  levelRequirement: 1,
+  strengthBonus: 0,
+  wisdomBonus: 0,
+  agilityBonus: 0,
+  enduranceBonus: 0,
+  weaponBase: 0,
+  armorValue: 0,
+};
+
+describe("deriveItemRequirements", () => {
+  it("requires no stats for non-equippable items", () => {
+    expect(deriveItemRequirements(materialItem)).toEqual({
+      strength: 0,
+      wisdom: 0,
+      agility: 0,
+      endurance: 0,
+    });
+  });
+
+  it("puts the primary requirement on the dominant stat", () => {
+    const req = deriveItemRequirements(swordItem);
+    expect(req.strength).toBe(3 + Math.floor(10 * 0.6));
+    expect(req.agility).toBe(3 + Math.floor(10 * 0.35));
+  });
+
+  it("has no secondary requirement for common items", () => {
+    const req = deriveItemRequirements({ ...swordItem, rarity: "COMMON" });
+    expect(req.agility).toBe(0);
+    expect(req.strength).toBeGreaterThan(0);
+  });
+});
+
+describe("checkItemRequirements", () => {
+  it("flags each unmet requirement", () => {
+    const check = checkItemRequirements(
+      { level: 5, strength: 4, wisdom: 20, agility: 20, endurance: 20 },
+      swordItem,
+    );
+    expect(check.met).toBe(false);
+    expect(check.unmet).toContain("level");
+    expect(check.unmet).toContain("strength");
+    expect(check.unmet).not.toContain("agility");
+  });
+
+  it("passes when the subject meets every requirement", () => {
+    const check = checkItemRequirements(
+      { level: 20, strength: 50, wisdom: 50, agility: 50, endurance: 50 },
+      swordItem,
+    );
+    expect(check.met).toBe(true);
+    expect(check.unmet).toHaveLength(0);
   });
 });

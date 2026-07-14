@@ -260,6 +260,16 @@ model Battle {
   @@index([createdAt])
 }
 
+model CombatSession {
+  id          String   @id @default(cuid())
+  characterId String   @unique
+  state       Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([characterId])
+}
+
 model MarketListing {
   id        String              @id @default(cuid())
   sellerId  String

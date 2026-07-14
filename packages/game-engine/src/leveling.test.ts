@@ -62,7 +62,7 @@ describe("applyXp", () => {
     const result = applyXp(start, needed);
     expect(result.level).toBe(2);
     expect(result.subLevel).toBe(0);
-    expect(result.pointsGained).toBe(4 * 1 + 3);
+    expect(result.pointsGained).toBe((SUB_LEVELS_PER_LEVEL - 1) * 1 + 3);
   });
 
   it("floors fractional xp and ignores negative gains", () => {

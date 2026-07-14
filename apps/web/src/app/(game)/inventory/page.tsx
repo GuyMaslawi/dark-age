@@ -1,6 +1,10 @@
 import { redirect } from "next/navigation";
 import { prisma, type EquipmentSlot } from "@kingdom/db";
-import { aggregateEquipment, effectiveStats } from "@kingdom/game-engine";
+import {
+  aggregateEquipment,
+  effectiveStats,
+  checkItemRequirements,
+} from "@kingdom/game-engine";
 import { requireUser, getCurrentCharacter } from "@/lib/session";
 import { bonusFromItem, isEquippable } from "@/lib/equipment";
 import { InventoryView, type InventoryItemView } from "./InventoryView";
@@ -18,26 +22,40 @@ export default async function InventoryPage() {
     orderBy: [{ item: { rarity: "desc" } }, { createdAt: "desc" }],
   });
 
-  const toView = (entry: (typeof inventory)[number]): InventoryItemView => ({
-    inventoryItemId: entry.id,
-    equippedSlot: entry.equippedSlot,
-    slug: entry.item.slug,
-    name: entry.item.name,
-    description: entry.item.description,
-    rarity: entry.item.rarity,
-    type: entry.item.type,
-    levelRequirement: entry.item.levelRequirement,
-    equippable: isEquippable(entry.item.type),
-    meetsLevel: character.level >= entry.item.levelRequirement,
-    stats: {
-      strengthBonus: entry.item.strengthBonus,
-      wisdomBonus: entry.item.wisdomBonus,
-      agilityBonus: entry.item.agilityBonus,
-      enduranceBonus: entry.item.enduranceBonus,
-      weaponBase: entry.item.weaponBase,
-      armorValue: entry.item.armorValue,
-    },
-  });
+  const subject = {
+    level: character.level,
+    strength: character.strength,
+    wisdom: character.wisdom,
+    agility: character.agility,
+    endurance: character.endurance,
+  };
+
+  const toView = (entry: (typeof inventory)[number]): InventoryItemView => {
+    const check = checkItemRequirements(subject, entry.item);
+    return {
+      inventoryItemId: entry.id,
+      equippedSlot: entry.equippedSlot,
+      slug: entry.item.slug,
+      name: entry.item.name,
+      description: entry.item.description,
+      rarity: entry.item.rarity,
+      type: entry.item.type,
+      levelRequirement: entry.item.levelRequirement,
+      equippable: isEquippable(entry.item.type),
+      meetsLevel: check.level,
+      meetsRequirements: check.met,
+      requirements: check.requirements,
+      unmetReqs: check.unmet,
+      stats: {
+        strengthBonus: entry.item.strengthBonus,
+        wisdomBonus: entry.item.wisdomBonus,
+        agilityBonus: entry.item.agilityBonus,
+        enduranceBonus: entry.item.enduranceBonus,
+        weaponBase: entry.item.weaponBase,
+        armorValue: entry.item.armorValue,
+      },
+    };
+  };
 
   const equippedEntries = inventory.filter((entry) => entry.equippedSlot !== null);
   const backpack = inventory

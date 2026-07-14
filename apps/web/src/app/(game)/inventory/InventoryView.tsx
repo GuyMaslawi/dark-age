@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import type { EquipmentSlot, ItemType, Rarity } from "@kingdom/db";
 import type { EffectiveStats } from "@kingdom/game-engine";
-import { ItemCard, type ItemStats } from "@/components/ItemCard";
+import { ItemCard, type ItemStats, type ItemRequirements } from "@/components/ItemCard";
 import { ItemIcon } from "@/components/art/ItemIcon";
 import { SceneBackdrop } from "@/components/scene/SceneBackdrop";
 import { EQUIP_SLOTS } from "@/lib/equipment";
@@ -26,6 +26,9 @@ export type InventoryItemView = {
   levelRequirement: number;
   equippable: boolean;
   meetsLevel: boolean;
+  meetsRequirements: boolean;
+  requirements: ItemRequirements;
+  unmetReqs: string[];
   stats: ItemStats;
 };
 
@@ -190,6 +193,8 @@ export function InventoryView({
                 stats={item.stats}
                 description={item.description}
                 meetsLevel={item.meetsLevel}
+                requirements={item.requirements}
+                unmetReqs={item.unmetReqs}
               >
                 {item.equippable && (
                   <ActionButton
@@ -197,7 +202,7 @@ export function InventoryView({
                     value={item.inventoryItemId}
                     label="לבש"
                     variant="gold"
-                    disabled={!item.meetsLevel}
+                    disabled={!item.meetsRequirements}
                   />
                 )}
               </ItemCard>

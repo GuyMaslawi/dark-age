@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { EquipmentSlot, prisma } from "@kingdom/db";
+import { checkItemRequirements } from "@kingdom/game-engine";
 import { requireUser } from "@/lib/session";
 import { isEquippable, slotsForType } from "@/lib/equipment";
 
@@ -14,6 +15,7 @@ const ERRORS: Record<string, string> = {
   NOT_OWNED: "הפריט לא נמצא במלאי שלך",
   NOT_EQUIPPABLE: "לא ניתן ללבוש פריט זה",
   LEVEL_TOO_LOW: "הרמה שלך נמוכה מדי לפריט זה",
+  STATS_TOO_LOW: "אינך עומד בדרישות המאפיינים של הפריט",
 };
 
 function chooseRingSlot(occupied: Set<EquipmentSlot | null>): EquipmentSlot {
@@ -41,6 +43,17 @@ export async function equipAction(
       if (!entry) throw new Error("NOT_OWNED");
       if (!isEquippable(entry.item.type)) throw new Error("NOT_EQUIPPABLE");
       if (character.level < entry.item.levelRequirement) throw new Error("LEVEL_TOO_LOW");
+      const check = checkItemRequirements(
+        {
+          level: character.level,
+          strength: character.strength,
+          wisdom: character.wisdom,
+          agility: character.agility,
+          endurance: character.endurance,
+        },
+        entry.item,
+      );
+      if (!check.met) throw new Error("STATS_TOO_LOW");
 
       const slots = slotsForType(entry.item.type);
       let targetSlot = slots[0];

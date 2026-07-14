@@ -1,6 +1,6 @@
 import { MAX_LEVEL } from "./formulas";
 
-export const SUB_LEVELS_PER_LEVEL = 5;
+export const SUB_LEVELS_PER_LEVEL = 3;
 export const POINTS_PER_SUB_LEVEL = 1;
 export const POINTS_PER_FULL_LEVEL = 3;
 

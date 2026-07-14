@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "dev": "pnpm --filter @kingdom/web dev",
+    "dev": "pnpm --parallel --filter @kingdom/web --filter @kingdom/socket dev",
+    "dev:web": "pnpm --filter @kingdom/web dev",
+    "dev:socket": "pnpm --filter @kingdom/socket dev",
     "build": "pnpm --filter @kingdom/db generate && pnpm --filter @kingdom/game-engine build && pnpm --filter @kingdom/web build",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",

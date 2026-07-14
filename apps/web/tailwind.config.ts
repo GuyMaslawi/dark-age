@@ -59,12 +59,23 @@ const config: Config = {
           "30%": { opacity: "0.7" },
           "100%": { transform: "translateY(-40px)", opacity: "0" },
         },
+        breathe: {
+          "0%,100%": { opacity: "0.35" },
+          "50%": { opacity: "0.7" },
+        },
+        dmgfloat: {
+          "0%": { opacity: "0", transform: "translate(-50%,0) scale(0.6)" },
+          "20%": { opacity: "1", transform: "translate(-50%,-16px) scale(1.1)" },
+          "100%": { opacity: "0", transform: "translate(-50%,-70px) scale(1)" },
+        },
       },
       animation: {
         hitshake: "hitshake 0.4s ease-in-out",
         hitflash: "hitflash 0.45s ease-out",
         floatup: "floatup 1.1s ease-out forwards",
         strike: "strike 0.35s ease-in-out",
+        breathe: "breathe 3.2s ease-in-out infinite",
+        dmgfloat: "dmgfloat 1.2s ease-out forwards",
       },
     },
   },

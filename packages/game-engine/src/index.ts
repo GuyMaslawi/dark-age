@@ -4,6 +4,7 @@ export * from "./formulas";
 export * from "./leveling";
 export * from "./rng";
 export * from "./combat";
+export * from "./tactical";
 export * from "./rewards";
 export * from "./equipment";
 export * from "./regen";

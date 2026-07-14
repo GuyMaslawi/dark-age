@@ -22,6 +22,20 @@ export function itemBonusLines(stats: ItemStats): string[] {
   return lines;
 }
 
+export type ItemRequirements = {
+  strength: number;
+  wisdom: number;
+  agility: number;
+  endurance: number;
+};
+
+const REQ_LABELS: { key: keyof ItemRequirements; label: string }[] = [
+  { key: "strength", label: "כוח" },
+  { key: "wisdom", label: "בינה" },
+  { key: "agility", label: "זריזות" },
+  { key: "endurance", label: "סיבולת" },
+];
+
 export function ItemCard({
   name,
   rarity,
@@ -31,6 +45,8 @@ export function ItemCard({
   stats,
   description,
   meetsLevel = true,
+  requirements,
+  unmetReqs,
   children,
 }: {
   name: string;
@@ -41,10 +57,15 @@ export function ItemCard({
   stats: ItemStats;
   description?: string;
   meetsLevel?: boolean;
+  requirements?: ItemRequirements;
+  unmetReqs?: string[];
   children?: React.ReactNode;
 }) {
   const meta = rarityMeta[rarity];
   const lines = itemBonusLines(stats);
+  const unmet = new Set(unmetReqs ?? []);
+  const levelUnmet = unmet.has("level") || !meetsLevel;
+  const statReqs = REQ_LABELS.filter((r) => (requirements?.[r.key] ?? 0) > 0);
   return (
     <div className={`panel flex gap-3 border p-3 ${meta.border}`}>
       <ItemIcon slug={slug} type={type} rarity={rarity} name={name} size={56} />
@@ -61,14 +82,21 @@ export function ItemCard({
           </div>
         )}
         {description && <p className="text-[11px] text-neutral-500">{description}</p>}
-        <div className="mt-auto flex items-center justify-between gap-2">
-          <span
-            className={`text-[11px] ${meetsLevel ? "text-neutral-500" : "text-red-400"}`}
-          >
-            דרישת רמה: {levelRequirement}
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px]">
+          <span className="text-neutral-500">דרישות:</span>
+          <span className={levelUnmet ? "font-semibold text-red-400" : "text-neutral-400"}>
+            רמה {levelRequirement}
           </span>
-          {children}
+          {statReqs.map((r) => (
+            <span
+              key={r.key}
+              className={unmet.has(r.key) ? "font-semibold text-red-400" : "text-neutral-400"}
+            >
+              {r.label} {requirements?.[r.key]}
+            </span>
+          ))}
         </div>
+        <div className="mt-auto flex items-center justify-end gap-2">{children}</div>
       </div>
     </div>
   );
