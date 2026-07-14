@@ -45,6 +45,12 @@ export async function attackMonsterAction(
     battleId = await prisma.$transaction(async (tx) => {
       const character = await tx.character.findUnique({
         where: { userId: user.id },
+        include: {
+          inventory: {
+            where: { equippedSlot: { not: null } },
+            include: { item: true },
+          },
+        },
       });
       if (!character) throw new Error("NO_CHARACTER");
       if (character.hp <= 0) throw new Error("NO_HP");
@@ -59,7 +65,7 @@ export async function attackMonsterAction(
 
       const rng = createRng(seed);
       const outcome = runBattle(
-        combatantFromCharacter(character),
+        combatantFromCharacter(character, character.inventory),
         combatantFromMonster(monster),
         rng,
       );

@@ -1,16 +1,28 @@
-import type { Character, Monster } from "@kingdom/db";
-import { UNARMED_WEAPON_BASE, type Combatant } from "@kingdom/game-engine";
+import type { Character, InventoryItem, Item, Monster } from "@kingdom/db";
+import {
+  aggregateEquipment,
+  effectiveStats,
+  type Combatant,
+} from "@kingdom/game-engine";
+import { bonusFromItem } from "@/lib/equipment";
 
-export function combatantFromCharacter(character: Character): Combatant {
+export type EquippedItem = InventoryItem & { item: Item };
+
+export function combatantFromCharacter(
+  character: Character,
+  equipped: EquippedItem[],
+): Combatant {
+  const bonus = aggregateEquipment(equipped.map((entry) => bonusFromItem(entry.item)));
+  const stats = effectiveStats(character, bonus);
   return {
     name: character.name,
-    strength: character.strength,
-    wisdom: character.wisdom,
-    agility: character.agility,
-    endurance: character.endurance,
+    strength: stats.strength,
+    wisdom: stats.wisdom,
+    agility: stats.agility,
+    endurance: stats.endurance,
     maxHp: Math.max(1, character.hp),
-    weaponBase: UNARMED_WEAPON_BASE,
-    armorValue: 0,
+    weaponBase: stats.weaponBase,
+    armorValue: stats.armorValue,
   };
 }
 

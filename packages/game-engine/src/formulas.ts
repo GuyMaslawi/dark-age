@@ -20,6 +20,13 @@ export const MAX_LEVEL = 60;
 export const UNARMED_WEAPON_BASE = 3;
 export const ENERGY_BATTLE_COST = 6;
 
+export const NPC_SELL_RATE = 0.4;
+export const MARKET_FEE_RATE = 0.05;
+
+export function npcSellPrice(basePrice: number): number {
+  return Math.max(1, Math.floor(basePrice * NPC_SELL_RATE));
+}
+
 const BASE_HP = 60;
 const HP_PER_ENDURANCE = 8;
 const HP_PER_LEVEL = 6;
