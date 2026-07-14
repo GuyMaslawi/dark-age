@@ -2,7 +2,9 @@ import Link from "next/link";
 import { SideNav } from "@/components/SideNav";
 import { ResourceBars } from "@/components/ResourceBars";
 import { SignOutButton } from "@/components/SignOutButton";
+import { SocketProvider } from "@/components/SocketProvider";
 import { requireUser, getCurrentCharacter } from "@/lib/session";
+import { mintSocketToken, publicSocketUrl } from "@/lib/socket";
 
 export default async function GameLayout({
   children,
@@ -11,8 +13,9 @@ export default async function GameLayout({
 }) {
   const user = await requireUser();
   const character = await getCurrentCharacter(user.id);
+  const socketToken = character ? mintSocketToken(character) : null;
 
-  return (
+  const shell = (
     <div className="flex min-h-dvh flex-col md:flex-row">
       <aside className="border-void-edge md:w-56 md:shrink-0 md:border-l">
         <div className="hidden items-center gap-2 px-4 py-4 md:flex">
@@ -39,4 +42,13 @@ export default async function GameLayout({
       </div>
     </div>
   );
+
+  if (socketToken) {
+    return (
+      <SocketProvider token={socketToken} url={publicSocketUrl()}>
+        {shell}
+      </SocketProvider>
+    );
+  }
+  return shell;
 }

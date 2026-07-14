@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@kingdom/db";
-import { requireUser } from "@/lib/session";
+import { requireUser, getCurrentCharacter } from "@/lib/session";
 import { Avatar } from "@/components/Avatar";
 import { EQUIP_SLOTS } from "@/lib/equipment";
 import { rarityMeta } from "@/lib/rarity";
@@ -10,7 +11,8 @@ export default async function PlayerProfilePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireUser();
+  const user = await requireUser();
+  const viewer = await getCurrentCharacter(user.id);
   const { id } = await params;
 
   const character = await prisma.character.findUnique({
@@ -59,6 +61,14 @@ export default async function PlayerProfilePage({
               </span>
             )}
           </div>
+          {viewer && viewer.id !== character.id && (
+            <Link
+              href={`/chat?to=${character.id}`}
+              className="btn-ghost mt-4 inline-block text-sm"
+            >
+              שלח הודעה
+            </Link>
+          )}
         </div>
       </div>
 

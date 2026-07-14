@@ -12,7 +12,9 @@
   "dependencies": {
     "@kingdom/db": "workspace:*",
     "@kingdom/game-engine": "workspace:*",
+    "@kingdom/protocol": "workspace:*",
     "argon2": "0.41.1",
+    "socket.io-client": "4.8.0",
     "next": "15.1.0",
     "next-auth": "5.0.0-beta.25",
     "react": "19.0.0",

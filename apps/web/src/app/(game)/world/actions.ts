@@ -20,6 +20,7 @@ import { requireUser } from "@/lib/session";
 import { combatantFromCharacter, combatantFromMonster } from "@/lib/combat";
 import { computeCharacterUpdate } from "@/lib/progression";
 import { syncRegen } from "@/lib/regen";
+import { notifyPlayer } from "@/lib/socket";
 import type { BattleLogData } from "@/lib/battleLog";
 
 export type WorldActionState = {
@@ -196,6 +197,8 @@ export async function attackPlayerAction(
   const now = new Date();
 
   let battleId = "";
+  let notice: { defenderId: string; attackerName: string; attackerWon: boolean } | null =
+    null;
   try {
     battleId = await prisma.$transaction(async (tx) => {
       const attacker = await tx.character.findUnique({
@@ -310,6 +313,11 @@ export async function attackPlayerAction(
           goldGained: 0,
         },
       });
+      notice = {
+        defenderId: defender.id,
+        attackerName: attacker.name,
+        attackerWon,
+      };
       return battle.id;
     });
   } catch (error) {
@@ -317,6 +325,22 @@ export async function attackPlayerAction(
       return { error: DOMAIN_ERRORS[error.message] ?? "שגיאה" };
     }
     throw error;
+  }
+
+  if (notice) {
+    const attacked = notice as {
+      defenderId: string;
+      attackerName: string;
+      attackerWon: boolean;
+    };
+    await notifyPlayer(attacked.defenderId, {
+      kind: "ATTACKED",
+      title: "הותקפת!",
+      body: attacked.attackerWon
+        ? `${attacked.attackerName} תקף אותך וניצח`
+        : `${attacked.attackerName} תקף אותך — הגנת בהצלחה`,
+      createdAt: now.toISOString(),
+    });
   }
 
   revalidatePath("/", "layout");

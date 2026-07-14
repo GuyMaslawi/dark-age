@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@kingdom/db", "@kingdom/game-engine"],
+  transpilePackages: ["@kingdom/db", "@kingdom/game-engine", "@kingdom/protocol"],
   serverExternalPackages: ["argon2", "@prisma/client"],
 };
 
