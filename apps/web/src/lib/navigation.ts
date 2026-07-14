@@ -10,6 +10,7 @@ export const navItems: NavItem[] = [
   { href: "/battles", label: "קרבות", icon: "🩸" },
   { href: "/inventory", label: "מלאי", icon: "🎒" },
   { href: "/market", label: "שוק", icon: "⚖️" },
+  { href: "/professions", label: "מלאכות", icon: "⛏️" },
   { href: "/clan", label: "שבט", icon: "🛡️" },
   { href: "/ranking", label: "דירוג", icon: "👑" },
   { href: "/chat", label: "צ'אט", icon: "💬" },

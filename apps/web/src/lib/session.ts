@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { prisma } from "@kingdom/db";
 import { auth } from "@/auth";
+import { withRegen } from "@/lib/regen";
 
 export async function requireUser() {
   const session = await auth();
@@ -11,8 +12,12 @@ export async function requireUser() {
 }
 
 export async function getCurrentCharacter(userId: string) {
-  return prisma.character.findUnique({
+  const character = await prisma.character.findUnique({
     where: { userId },
     include: { location: true },
   });
+  if (!character) {
+    return null;
+  }
+  return withRegen(character, new Date());
 }

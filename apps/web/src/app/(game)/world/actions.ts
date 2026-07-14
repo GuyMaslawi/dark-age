@@ -19,6 +19,7 @@ import {
 import { requireUser } from "@/lib/session";
 import { combatantFromCharacter, combatantFromMonster } from "@/lib/combat";
 import { computeCharacterUpdate } from "@/lib/progression";
+import { syncRegen } from "@/lib/regen";
 import type { BattleLogData } from "@/lib/battleLog";
 
 export type WorldActionState = {
@@ -56,6 +57,7 @@ export async function attackMonsterAction(
   const user = await requireUser();
   const monsterId = String(formData.get("monsterId") ?? "");
   const seed = randomSeed();
+  const now = new Date();
 
   let battleId = "";
   try {
@@ -70,6 +72,7 @@ export async function attackMonsterAction(
         },
       });
       if (!character) throw new Error("NO_CHARACTER");
+      await syncRegen(tx, character, now);
       if (character.hp <= 0) throw new Error("NO_HP");
       if (character.energy < ENERGY_BATTLE_COST) throw new Error("NO_ENERGY");
 
@@ -110,6 +113,8 @@ export async function attackMonsterAction(
         postBattleHp: outcome.finalHpA,
       });
       update.data.energy = { decrement: ENERGY_BATTLE_COST };
+      update.data.hpUpdatedAt = now;
+      update.data.energyUpdatedAt = now;
 
       await tx.character.update({ where: { id: character.id }, data: update.data });
 
@@ -198,6 +203,7 @@ export async function attackPlayerAction(
         include: EQUIPPED_INCLUDE,
       });
       if (!attacker) throw new Error("NO_CHARACTER");
+      await syncRegen(tx, attacker, now);
       if (attacker.hp <= 0) throw new Error("NO_HP");
       if (attacker.energy < ENERGY_PVP_COST) throw new Error("PVP_NO_ENERGY");
 
@@ -212,6 +218,7 @@ export async function attackPlayerAction(
       if (defender.pvpProtectedUntil && defender.pvpProtectedUntil > now) {
         throw new Error("PROTECTED");
       }
+      await syncRegen(tx, defender, now);
 
       const rng = createRng(seed);
       const outcome = runBattle(
@@ -237,6 +244,8 @@ export async function attackPlayerAction(
       });
       attackerUpdate.data.energy = { decrement: ENERGY_PVP_COST };
       attackerUpdate.data.lastPvpAttackAt = now;
+      attackerUpdate.data.hpUpdatedAt = now;
+      attackerUpdate.data.energyUpdatedAt = now;
       if (defenderWon) {
         attackerUpdate.data.pvpProtectedUntil = protectUntil;
       }
@@ -249,6 +258,7 @@ export async function attackPlayerAction(
         isPvp: true,
         postBattleHp: outcome.finalHpB,
       });
+      defenderUpdate.data.hpUpdatedAt = now;
       if (attackerWon) {
         defenderUpdate.data.pvpProtectedUntil = protectUntil;
       }
@@ -319,6 +329,7 @@ export async function travelAction(
 ): Promise<WorldActionState> {
   const user = await requireUser();
   const locationId = String(formData.get("locationId") ?? "");
+  const now = new Date();
 
   try {
     await prisma.$transaction(async (tx) => {
@@ -327,6 +338,7 @@ export async function travelAction(
       });
       if (!character) throw new Error("NO_CHARACTER");
       if (character.locationId === locationId) throw new Error("SAME_LOCATION");
+      await syncRegen(tx, character, now);
 
       const destination = await tx.location.findUnique({
         where: { id: locationId },
@@ -339,6 +351,7 @@ export async function travelAction(
         data: {
           locationId: destination.id,
           energy: { decrement: destination.energyCost },
+          energyUpdatedAt: now,
         },
       });
     });
