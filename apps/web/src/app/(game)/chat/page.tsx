@@ -34,6 +34,19 @@ export default async function ChatPage({
 
   const globalMessages = globalRaw.reverse().map(toView);
 
+  let clan: { name: string } | null = null;
+  let clanMessages: ChatMessageView[] = [];
+  if (character.clanMembership) {
+    clan = { name: character.clanMembership.clan.name };
+    const clanRaw = await prisma.message.findMany({
+      where: { channel: MessageChannel.CLAN, clanId: character.clanMembership.clanId },
+      orderBy: { createdAt: "desc" },
+      take: 50,
+      include: { sender: { select: { name: true } } },
+    });
+    clanMessages = clanRaw.reverse().map(toView);
+  }
+
   let partner: { id: string; name: string } | null = null;
   let privateMessages: ChatMessageView[] = [];
   if (to && to !== character.id) {
@@ -63,6 +76,8 @@ export default async function ChatPage({
     <ChatView
       currentId={character.id}
       globalMessages={globalMessages}
+      clan={clan}
+      clanMessages={clanMessages}
       partner={partner}
       privateMessages={privateMessages}
     />

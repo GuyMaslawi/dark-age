@@ -27,6 +27,8 @@ export function npcSellPrice(basePrice: number): number {
   return Math.max(1, Math.floor(basePrice * NPC_SELL_RATE));
 }
 
+export const CLAN_CREATION_COST = 1000;
+
 export const ENERGY_PVP_COST = 8;
 export const PVP_LEVEL_RANGE = 0.2;
 export const PVP_PROTECTION_MINUTES = 30;

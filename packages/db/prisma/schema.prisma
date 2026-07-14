@@ -138,6 +138,7 @@ model Character {
   attackerBattles  Battle[]        @relation("AttackerBattles")
   defenderBattles  Battle[]        @relation("DefenderBattles")
   clanMembership   ClanMember?
+  clanInvites      ClanInvite[]
   marketListings   MarketListing[] @relation("SellerListings")
   professionJobs   ProfessionJob[]
   sentMessages     Message[]       @relation("SentMessages")
@@ -282,8 +283,21 @@ model Clan {
   treasury    Int          @default(0)
   createdAt   DateTime     @default(now())
   members     ClanMember[]
+  invites     ClanInvite[]
 
   @@index([treasury])
+}
+
+model ClanInvite {
+  id          String    @id @default(cuid())
+  clanId      String
+  clan        Clan      @relation(fields: [clanId], references: [id], onDelete: Cascade)
+  characterId String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+
+  @@unique([clanId, characterId])
+  @@index([characterId])
 }
 
 model ClanMember {

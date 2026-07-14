@@ -13,7 +13,13 @@ export default async function GameLayout({
 }) {
   const user = await requireUser();
   const character = await getCurrentCharacter(user.id);
-  const socketToken = character ? mintSocketToken(character) : null;
+  const socketToken = character
+    ? mintSocketToken({
+        id: character.id,
+        name: character.name,
+        clanId: character.clanMembership?.clanId ?? null,
+      })
+    : null;
 
   const shell = (
     <div className="flex min-h-dvh flex-col md:flex-row">

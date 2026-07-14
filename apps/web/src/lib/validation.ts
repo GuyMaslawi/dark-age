@@ -27,6 +27,24 @@ export const characterNameSchema = z
     "השם יכול להכיל אותיות עברית או אנגלית, ספרות ורווחים בלבד",
   );
 
+export const createClanSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(3, "שם השבט חייב להכיל לפחות 3 תווים")
+    .max(24, "שם השבט יכול להכיל עד 24 תווים")
+    .regex(/^[א-תa-zA-Z0-9 ]+$/, "שם השבט מכיל תווים לא חוקיים"),
+  tag: z
+    .string()
+    .trim()
+    .min(2, "התג חייב להכיל לפחות 2 תווים")
+    .max(4, "התג יכול להכיל עד 4 תווים")
+    .regex(/^[א-תa-zA-Z0-9]+$/, "התג מכיל תווים לא חוקיים"),
+  description: z.string().trim().max(200, "התיאור ארוך מדי").optional(),
+});
+
+export type CreateClanInput = z.infer<typeof createClanSchema>;
+
 export const createCharacterSchema = z.object({
   name: characterNameSchema,
   gender: z.enum(["MALE", "FEMALE"]),

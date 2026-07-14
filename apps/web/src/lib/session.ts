@@ -14,7 +14,10 @@ export async function requireUser() {
 export async function getCurrentCharacter(userId: string) {
   const character = await prisma.character.findUnique({
     where: { userId },
-    include: { location: true },
+    include: {
+      location: true,
+      clanMembership: { include: { clan: { select: { id: true, name: true, tag: true } } } },
+    },
   });
   if (!character) {
     return null;

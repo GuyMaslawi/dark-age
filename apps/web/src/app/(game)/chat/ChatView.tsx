@@ -59,20 +59,27 @@ function MessageList({
   );
 }
 
+type Tab = "global" | "clan" | "private";
+
 export function ChatView({
   currentId,
   globalMessages,
+  clan,
+  clanMessages,
   partner,
   privateMessages,
 }: {
   currentId: string;
   globalMessages: ChatMessageView[];
+  clan: { name: string } | null;
+  clanMessages: ChatMessageView[];
   partner: { id: string; name: string } | null;
   privateMessages: ChatMessageView[];
 }) {
   const socket = useSocket();
-  const [tab, setTab] = useState<"global" | "private">(partner ? "private" : "global");
+  const [tab, setTab] = useState<Tab>(partner ? "private" : "global");
   const [global, setGlobal] = useState(globalMessages);
+  const [clanMsgs, setClanMsgs] = useState(clanMessages);
   const [priv, setPriv] = useState(privateMessages);
   const [draft, setDraft] = useState("");
 
@@ -91,6 +98,8 @@ export function ChatView({
       };
       if (payload.channel === "GLOBAL") {
         setGlobal((current) => [...current, view]);
+      } else if (payload.channel === "CLAN") {
+        setClanMsgs((current) => [...current, view]);
       } else if (payload.channel === "PRIVATE" && partner) {
         const involvesPartner =
           payload.senderId === partner.id || payload.recipientId === partner.id;
@@ -112,7 +121,9 @@ export function ChatView({
     }
     if (tab === "global") {
       socket.emit(SOCKET_EVENTS.chatSend, { channel: "GLOBAL", body });
-    } else if (partner) {
+    } else if (tab === "clan" && clan) {
+      socket.emit(SOCKET_EVENTS.chatSend, { channel: "CLAN", body });
+    } else if (tab === "private" && partner) {
       socket.emit(SOCKET_EVENTS.chatSend, {
         channel: "PRIVATE",
         body,
@@ -122,7 +133,9 @@ export function ChatView({
     setDraft("");
   };
 
-  const canSend = tab === "global" || partner !== null;
+  const messages = tab === "global" ? global : tab === "clan" ? clanMsgs : priv;
+  const canSend =
+    tab === "global" || (tab === "clan" && clan !== null) || (tab === "private" && partner !== null);
 
   return (
     <div className="mx-auto max-w-2xl space-y-4">
@@ -140,6 +153,19 @@ export function ChatView({
         >
           כללי
         </button>
+        {clan && (
+          <button
+            type="button"
+            onClick={() => setTab("clan")}
+            className={`rounded-md border px-4 py-2 text-sm transition-colors ${
+              tab === "clan"
+                ? "border-gold/60 bg-gold/15 text-gold-bright"
+                : "border-void-edge text-neutral-300 hover:border-gold/40"
+            }`}
+          >
+            שבט · {clan.name}
+          </button>
+        )}
         <button
           type="button"
           onClick={() => setTab("private")}
@@ -154,7 +180,7 @@ export function ChatView({
         </button>
       </div>
 
-      <MessageList messages={tab === "global" ? global : priv} currentId={currentId} />
+      <MessageList messages={messages} currentId={currentId} />
 
       <form
         onSubmit={(event) => {
