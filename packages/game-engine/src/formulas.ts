@@ -27,6 +27,14 @@ export function npcSellPrice(basePrice: number): number {
   return Math.max(1, Math.floor(basePrice * NPC_SELL_RATE));
 }
 
+export function marketFee(price: number): number {
+  return Math.floor(price * MARKET_FEE_RATE);
+}
+
+export function marketNetProceeds(price: number): number {
+  return Math.max(0, price - marketFee(price));
+}
+
 export const CLAN_CREATION_COST = 1000;
 
 export const ENERGY_PVP_COST = 8;
