@@ -237,25 +237,41 @@ const block = (rows) =>
     .map((a) => `[${a.path}]\n${a.prompt}\n`)
     .join("\n");
 
-const prompts = `DARK AGE — ART PROMPTS (copy-paste)
+const consistencyTip = `TIP for consistency: generate ONE image first, then reuse it as a
+"style reference" (Leonardo "Image Guidance -> Style Reference", or
+Midjourney --sref) for all the rest so the whole set matches.`;
+
+const section = (cat) =>
+  `${"═".repeat(64)}\n  ${catTitle[cat]}\n${"═".repeat(64)}\n\n${block(byCat(cat))}`;
+
+const locationRows = byCat("location");
+const restCats = ["portrait", "monster", "item"];
+const restCount = restCats.reduce((n, c) => n + byCat(c).length, 0);
+
+const locationsFile = `DARK AGE — ART PROMPTS · LOCATIONS & SCENES
 ${"=".repeat(64)}
-${assets.length} images. The global style is already baked into every prompt.
-For each one: paste the prompt into your image tool, then save the result
-using the filename in [brackets] above it. Generated files override the
-built-in SVG placeholders automatically — no code changes.
+${locationRows.length} images. In Leonardo set Aspect Ratio 16:9 for all of these.
+Paste each prompt, then save the result using the filename in [brackets].
+Files go in apps/web/public/art/locations/ and override the SVG placeholders.
 
-TIP for consistency: generate ONE image first, then reuse it as a
-"style reference" (Midjourney --sref, or the "style reference" upload in
-Leonardo / ImageFX) for all the rest so the whole set matches.
+${consistencyTip}
 
-${Object.keys(catTitle)
-  .map(
-    (cat) =>
-      `\n${"═".repeat(64)}\n  ${catTitle[cat]}\n${"═".repeat(64)}\n\n${block(byCat(cat))}`,
-  )
-  .join("")}`;
+${section("location")}`;
 
-writeFileSync(join(artDir, "prompts.txt"), prompts);
+const restFile = `DARK AGE — ART PROMPTS · EVERYTHING ELSE (portraits, monsters, items)
+${"=".repeat(64)}
+${restCount} images. In Leonardo set Aspect Ratio 1:1 (square) for all of these.
+Paste each prompt, then save the result using the filename in [brackets].
+Files override the SVG placeholders automatically — no code changes.
+
+${consistencyTip}
+
+${restCats.map(section).join("\n\n")}`;
+
+writeFileSync(join(artDir, "prompts-locations.txt"), locationsFile);
+writeFileSync(join(artDir, "prompts-everything-else.txt"), restFile);
 console.log(
-  `Wrote ${assets.length} assets to art-manifest.json, README.md, and prompts.txt`,
+  `Wrote ${assets.length} assets: art-manifest.json, README.md, ` +
+    `prompts-locations.txt (${locationRows.length}), ` +
+    `prompts-everything-else.txt (${restCount})`,
 );

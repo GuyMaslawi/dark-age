@@ -1,0 +1,58 @@
+DARK AGE — ART PROMPTS · LOCATIONS & SCENES
+================================================================
+15 images. In Leonardo set Aspect Ratio 16:9 for all of these.
+Paste each prompt, then save the result using the filename in [brackets].
+Files go in apps/web/public/art/locations/ and override the SVG placeholders.
+
+TIP for consistency: generate ONE image first, then reuse it as a
+"style reference" (Leonardo "Image Guidance -> Style Reference", or
+Midjourney --sref) for all the rest so the whole set matches.
+
+════════════════════════════════════════════════════════════════
+  LOCATIONS & SCENES  →  save in  art/locations/  (landscape, ~1600x900)
+════════════════════════════════════════════════════════════════
+
+[art/locations/misty-vale.png]
+The Misty Vale: a green valley wrapped in permanent fog, gateway to the world, faint sunlight through mist, twisted trees. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/shadow-forest.png]
+The Shadow Forest: a dense dark forest where sunlight barely reaches, glowing eyes between the trunks, thick undergrowth. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/rot-marshes.png]
+The Rot Marshes: a fetid swamp of sinking mud, poisonous green mist, dead trees and bubbling water. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/fallen-mines.png]
+The Fallen Mines: abandoned mine tunnels dug too deep, broken supports, faint ominous glow from below, dust and rubble. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/ash-desert.png]
+The Ash Desert: a scorched wasteland to the horizon, hot ash blowing on the wind over whitened bones. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/frost-ridge.png]
+The Frost Ridge: frozen jagged peaks, cutting wind and blowing snow, ice-blue light, only the strong survive. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/eternal-ruins.png]
+The Eternal Ruins: remains of a forgotten ancient kingdom, broken columns and arches, ghostly haze, purple twilight. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/abyss-of-darkness.png]
+The Abyss of Darkness: the deepest chasm in the world, living darkness rising from a bottomless rift, violet void glow. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/town.png]
+The Home City: a medieval fantasy town square hub at dusk, torch-lit stone buildings around a plaza: a blacksmith forge, a market, a tavern, a keep and a gate to the wilds, cobblestones, warm glow. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/keep.png]
+The Keep: the great stone hall of a clan keep, banners, long table, cold blue light through tall windows. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/forge.png]
+The Forge: a medieval blacksmith forge interior, glowing furnace and molten metal, anvils, hanging tools and weapons, warm orange ember light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/market.png]
+The Market: a bustling medieval fantasy market hall, wooden stalls with wares and weapons, hanging lanterns, warm golden light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/tavern.png]
+The Tavern: a cozy warm medieval tavern interior, roaring fireplace, wooden tables and benches, barrels and mugs, amber firelight. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/throne.png]
+The Throne Hall: a grand throne hall of a dark kingdom, golden throne on a dais, tall columns, banners, dramatic purple and gold light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
+[art/locations/arena.png]
+The Arena: a grim stone battle arena pit, blood-stained sand, torch sconces, dark spectator stands, ominous red light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements

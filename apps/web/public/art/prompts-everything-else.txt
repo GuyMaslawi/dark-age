@@ -1,63 +1,53 @@
-DARK AGE — ART PROMPTS (copy-paste)
+DARK AGE — ART PROMPTS · EVERYTHING ELSE (portraits, monsters, items)
 ================================================================
-93 images. The global style is already baked into every prompt.
-For each one: paste the prompt into your image tool, then save the result
-using the filename in [brackets] above it. Generated files override the
-built-in SVG placeholders automatically — no code changes.
+78 images. In Leonardo set Aspect Ratio 1:1 (square) for all of these.
+Paste each prompt, then save the result using the filename in [brackets].
+Files override the SVG placeholders automatically — no code changes.
 
 TIP for consistency: generate ONE image first, then reuse it as a
-"style reference" (Midjourney --sref, or the "style reference" upload in
-Leonardo / ImageFX) for all the rest so the whole set matches.
-
+"style reference" (Leonardo "Image Guidance -> Style Reference", or
+Midjourney --sref) for all the rest so the whole set matches.
 
 ════════════════════════════════════════════════════════════════
-  LOCATIONS & SCENES  →  save in  art/locations/  (landscape, ~1600x900)
+  CHARACTER PORTRAITS  →  save in  art/portraits/  (square, ~768x768)
 ════════════════════════════════════════════════════════════════
 
-[art/locations/misty-vale.png]
-The Misty Vale: a green valley wrapped in permanent fog, gateway to the world, faint sunlight through mist, twisted trees. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/ember-male.png]
+portrait bust of a male hooded dark-fantasy adventurer, gold-accented armor and cloak (gold ember), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/shadow-forest.png]
-The Shadow Forest: a dense dark forest where sunlight barely reaches, glowing eyes between the trunks, thick undergrowth. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/ember-female.png]
+portrait bust of a female hooded dark-fantasy adventurer, gold-accented armor and cloak (gold ember), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/rot-marshes.png]
-The Rot Marshes: a fetid swamp of sinking mud, poisonous green mist, dead trees and bubbling water. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/crimson-male.png]
+portrait bust of a male hooded dark-fantasy adventurer, crimson-accented armor and cloak (crimson red), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/fallen-mines.png]
-The Fallen Mines: abandoned mine tunnels dug too deep, broken supports, faint ominous glow from below, dust and rubble. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/crimson-female.png]
+portrait bust of a female hooded dark-fantasy adventurer, crimson-accented armor and cloak (crimson red), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/ash-desert.png]
-The Ash Desert: a scorched wasteland to the horizon, hot ash blowing on the wind over whitened bones. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/verdant-male.png]
+portrait bust of a male hooded dark-fantasy adventurer, green-accented armor and cloak (moss green), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/frost-ridge.png]
-The Frost Ridge: frozen jagged peaks, cutting wind and blowing snow, ice-blue light, only the strong survive. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/verdant-female.png]
+portrait bust of a female hooded dark-fantasy adventurer, green-accented armor and cloak (moss green), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/eternal-ruins.png]
-The Eternal Ruins: remains of a forgotten ancient kingdom, broken columns and arches, ghostly haze, purple twilight. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/azure-male.png]
+portrait bust of a male hooded dark-fantasy adventurer, blue-accented armor and cloak (azure blue), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/abyss-of-darkness.png]
-The Abyss of Darkness: the deepest chasm in the world, living darkness rising from a bottomless rift, violet void glow. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/azure-female.png]
+portrait bust of a female hooded dark-fantasy adventurer, blue-accented armor and cloak (azure blue), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/town.png]
-The Home City: a medieval fantasy town square hub at dusk, torch-lit stone buildings around a plaza: a blacksmith forge, a market, a tavern, a keep and a gate to the wilds, cobblestones, warm glow. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/violet-male.png]
+portrait bust of a male hooded dark-fantasy adventurer, purple-accented armor and cloak (violet purple), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/keep.png]
-The Keep: the great stone hall of a clan keep, banners, long table, cold blue light through tall windows. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/violet-female.png]
+portrait bust of a female hooded dark-fantasy adventurer, purple-accented armor and cloak (violet purple), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/forge.png]
-The Forge: a medieval blacksmith forge interior, glowing furnace and molten metal, anvils, hanging tools and weapons, warm orange ember light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/ash-male.png]
+portrait bust of a male hooded dark-fantasy adventurer, gray-accented armor and cloak (ashen gray), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/market.png]
-The Market: a bustling medieval fantasy market hall, wooden stalls with wares and weapons, hanging lanterns, warm golden light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+[art/portraits/ash-female.png]
+portrait bust of a female hooded dark-fantasy adventurer, gray-accented armor and cloak (ashen gray), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
-[art/locations/tavern.png]
-The Tavern: a cozy warm medieval tavern interior, roaring fireplace, wooden tables and benches, barrels and mugs, amber firelight. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/locations/throne.png]
-The Throne Hall: a grand throne hall of a dark kingdom, golden throne on a dais, tall columns, banners, dramatic purple and gold light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/locations/arena.png]
-The Arena: a grim stone battle arena pit, blood-stained sand, torch sconces, dark spectator stands, ominous red light. Wide establishing background scene, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
 
 ════════════════════════════════════════════════════════════════
   MONSTERS  →  save in  art/monsters/  (square, ~768x768)
@@ -134,6 +124,7 @@ an enormous dark devourer with a gaping maw, a level 48 monster in abyssal void.
 
 [art/monsters/the-nameless.png]
 The Nameless, a titanic shapeless void god, a level 55 monster in abyssal void. Single full creature, centered, facing viewer, dark vignette background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
+
 
 ════════════════════════════════════════════════════════════════
   ITEMS  →  save in  art/items/  (square, ~512x512)
@@ -264,43 +255,3 @@ a small red healing potion, a common consumable game inventory item icon, single
 
 [art/items/greater-healing-draught.png]
 a large ornate red healing potion, a uncommon consumable game inventory item icon, single object centered on a dark stone background, subtle uncommon colored glow, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-════════════════════════════════════════════════════════════════
-  CHARACTER PORTRAITS  →  save in  art/portraits/  (square, ~768x768)
-════════════════════════════════════════════════════════════════
-
-[art/portraits/ember-male.png]
-portrait bust of a male hooded dark-fantasy adventurer, gold-accented armor and cloak (gold ember), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/ember-female.png]
-portrait bust of a female hooded dark-fantasy adventurer, gold-accented armor and cloak (gold ember), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/crimson-male.png]
-portrait bust of a male hooded dark-fantasy adventurer, crimson-accented armor and cloak (crimson red), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/crimson-female.png]
-portrait bust of a female hooded dark-fantasy adventurer, crimson-accented armor and cloak (crimson red), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/verdant-male.png]
-portrait bust of a male hooded dark-fantasy adventurer, green-accented armor and cloak (moss green), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/verdant-female.png]
-portrait bust of a female hooded dark-fantasy adventurer, green-accented armor and cloak (moss green), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/azure-male.png]
-portrait bust of a male hooded dark-fantasy adventurer, blue-accented armor and cloak (azure blue), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/azure-female.png]
-portrait bust of a female hooded dark-fantasy adventurer, blue-accented armor and cloak (azure blue), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/violet-male.png]
-portrait bust of a male hooded dark-fantasy adventurer, purple-accented armor and cloak (violet purple), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/violet-female.png]
-portrait bust of a female hooded dark-fantasy adventurer, purple-accented armor and cloak (violet purple), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/ash-male.png]
-portrait bust of a male hooded dark-fantasy adventurer, gray-accented armor and cloak (ashen gray), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
-
-[art/portraits/ash-female.png]
-portrait bust of a female hooded dark-fantasy adventurer, gray-accented armor and cloak (ashen gray), grim determined face partly shadowed by the hood, centered, dark background, dark fantasy, painterly digital illustration, cinematic dramatic lighting, muted desaturated palette with gold and ember accents, highly detailed, moody grim atmosphere, no text, no watermark, no logo, no UI elements
