@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { pveXpReward, rollGold, rollLoot } from "./rewards";
+import { pveXpReward, pvpXpReward, rollGold, rollLoot } from "./rewards";
 import { createRng } from "./rng";
 
 describe("pveXpReward", () => {
@@ -56,5 +56,13 @@ describe("rollLoot", () => {
       if (drop === "b") countB += 1;
     }
     expect(countA).toBeGreaterThan(countB);
+  });
+});
+
+describe("pvpXpReward", () => {
+  it("scales with opponent level and rewards the winner more", () => {
+    expect(pvpXpReward(10, true)).toBe(15 + 60);
+    expect(pvpXpReward(10, false)).toBeLessThan(pvpXpReward(10, true));
+    expect(pvpXpReward(20, true)).toBeGreaterThan(pvpXpReward(10, true));
   });
 });

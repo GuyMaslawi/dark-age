@@ -9,6 +9,14 @@ export function pveXpReward(monsterXp: number, won: boolean): number {
   return Math.max(1, Math.floor(monsterXp * LOSER_XP_SHARE));
 }
 
+export function pvpXpReward(opponentLevel: number, won: boolean): number {
+  const base = 15 + opponentLevel * 6;
+  if (won) {
+    return base;
+  }
+  return Math.max(1, Math.floor(base * LOSER_XP_SHARE));
+}
+
 export function rollGold(min: number, max: number, rng: Rng): number {
   if (max <= min) {
     return Math.max(0, min);

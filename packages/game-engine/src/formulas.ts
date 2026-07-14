@@ -27,6 +27,22 @@ export function npcSellPrice(basePrice: number): number {
   return Math.max(1, Math.floor(basePrice * NPC_SELL_RATE));
 }
 
+export const ENERGY_PVP_COST = 8;
+export const PVP_LEVEL_RANGE = 0.2;
+export const PVP_PROTECTION_MINUTES = 30;
+
+export function pvpLevelBounds(attackerLevel: number): { low: number; high: number } {
+  return {
+    low: Math.floor(attackerLevel * (1 - PVP_LEVEL_RANGE)),
+    high: Math.ceil(attackerLevel * (1 + PVP_LEVEL_RANGE)),
+  };
+}
+
+export function withinPvpRange(attackerLevel: number, defenderLevel: number): boolean {
+  const { low, high } = pvpLevelBounds(attackerLevel);
+  return defenderLevel >= low && defenderLevel <= high;
+}
+
 const BASE_HP = 60;
 const HP_PER_ENDURANCE = 8;
 const HP_PER_LEVEL = 6;

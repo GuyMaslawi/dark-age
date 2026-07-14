@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
 import { prisma } from "@kingdom/db";
-import { ENERGY_BATTLE_COST } from "@kingdom/game-engine";
+import { ENERGY_BATTLE_COST, ENERGY_PVP_COST, pvpLevelBounds } from "@kingdom/game-engine";
 import { requireUser, getCurrentCharacter } from "@/lib/session";
 import { WorldMap } from "./WorldMap";
 import { MonsterList } from "./MonsterList";
+import { OpponentsList } from "./OpponentsList";
 
 export default async function WorldPage() {
   const user = await requireUser();
@@ -12,11 +13,22 @@ export default async function WorldPage() {
     redirect("/character");
   }
 
-  const [locations, monsters] = await Promise.all([
+  const { low, high } = pvpLevelBounds(character.level);
+  const now = new Date();
+  const [locations, monsters, opponents] = await Promise.all([
     prisma.location.findMany({ orderBy: { orderIndex: "asc" } }),
     prisma.monster.findMany({
       where: { locationId: character.locationId },
       orderBy: { level: "asc" },
+    }),
+    prisma.character.findMany({
+      where: {
+        locationId: character.locationId,
+        id: { not: character.id },
+        level: { gte: low, lte: high },
+      },
+      orderBy: { level: "asc" },
+      take: 30,
     }),
   ]);
 
@@ -55,6 +67,21 @@ export default async function WorldPage() {
           xpReward: monster.xpReward,
           goldMin: monster.goldMin,
           goldMax: monster.goldMax,
+        }))}
+      />
+
+      <OpponentsList
+        energy={character.energy}
+        pvpCost={ENERGY_PVP_COST}
+        opponents={opponents.map((opponent) => ({
+          id: opponent.id,
+          name: opponent.name,
+          level: opponent.level,
+          subLevel: opponent.subLevel,
+          pvpWins: opponent.pvpWins,
+          pvpLosses: opponent.pvpLosses,
+          protected:
+            opponent.pvpProtectedUntil !== null && opponent.pvpProtectedUntil > now,
         }))}
       />
     </div>

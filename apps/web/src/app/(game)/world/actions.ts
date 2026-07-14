@@ -5,12 +5,16 @@ import { redirect } from "next/navigation";
 import { prisma } from "@kingdom/db";
 import {
   ENERGY_BATTLE_COST,
+  ENERGY_PVP_COST,
+  PVP_PROTECTION_MINUTES,
   createRng,
   randomSeed,
   pveXpReward,
+  pvpXpReward,
   rollGold,
   rollLoot,
   runBattle,
+  withinPvpRange,
 } from "@kingdom/game-engine";
 import { requireUser } from "@/lib/session";
 import { combatantFromCharacter, combatantFromMonster } from "@/lib/combat";
@@ -30,7 +34,20 @@ const DOMAIN_ERRORS: Record<string, string> = {
   NOT_HERE: "האזור לא נמצא",
   SAME_LOCATION: "אתה כבר נמצא כאן",
   TRAVEL_NO_ENERGY: "אין לך מספיק אנרגיה למסע",
+  NO_TARGET: "השחקן לא נמצא",
+  SELF: "אי אפשר לתקוף את עצמך",
+  DIFF_REGION: "השחקן לא נמצא באזור שלך",
+  OUT_OF_RANGE: "השחקן מחוץ לטווח הרמות שלך",
+  PROTECTED: "השחקן מוגן מהתקפות כרגע",
+  PVP_NO_ENERGY: "אין לך מספיק אנרגיה לקרב שחקנים",
 };
+
+const EQUIPPED_INCLUDE = {
+  inventory: {
+    where: { equippedSlot: { not: null } },
+    include: { item: true },
+  },
+} as const;
 
 export async function attackMonsterAction(
   _prev: WorldActionState,
@@ -149,6 +166,138 @@ export async function attackMonsterAction(
           log: log as unknown as object,
           xpGained,
           goldGained,
+        },
+      });
+      return battle.id;
+    });
+  } catch (error) {
+    if (error instanceof Error && DOMAIN_ERRORS[error.message]) {
+      return { error: DOMAIN_ERRORS[error.message] ?? "שגיאה" };
+    }
+    throw error;
+  }
+
+  revalidatePath("/", "layout");
+  redirect(`/battles/${battleId}`);
+}
+
+export async function attackPlayerAction(
+  _prev: WorldActionState,
+  formData: FormData,
+): Promise<WorldActionState> {
+  const user = await requireUser();
+  const defenderId = String(formData.get("defenderId") ?? "");
+  const seed = randomSeed();
+  const now = new Date();
+
+  let battleId = "";
+  try {
+    battleId = await prisma.$transaction(async (tx) => {
+      const attacker = await tx.character.findUnique({
+        where: { userId: user.id },
+        include: EQUIPPED_INCLUDE,
+      });
+      if (!attacker) throw new Error("NO_CHARACTER");
+      if (attacker.hp <= 0) throw new Error("NO_HP");
+      if (attacker.energy < ENERGY_PVP_COST) throw new Error("PVP_NO_ENERGY");
+
+      const defender = await tx.character.findUnique({
+        where: { id: defenderId },
+        include: EQUIPPED_INCLUDE,
+      });
+      if (!defender) throw new Error("NO_TARGET");
+      if (defender.id === attacker.id) throw new Error("SELF");
+      if (defender.locationId !== attacker.locationId) throw new Error("DIFF_REGION");
+      if (!withinPvpRange(attacker.level, defender.level)) throw new Error("OUT_OF_RANGE");
+      if (defender.pvpProtectedUntil && defender.pvpProtectedUntil > now) {
+        throw new Error("PROTECTED");
+      }
+
+      const rng = createRng(seed);
+      const outcome = runBattle(
+        combatantFromCharacter(attacker, attacker.inventory),
+        combatantFromCharacter(defender, defender.inventory),
+        rng,
+      );
+      const attackerWon = outcome.winner === "A";
+      const defenderWon = outcome.winner === "B";
+      const draw = outcome.winner === "DRAW";
+
+      const xpAttacker = pvpXpReward(defender.level, attackerWon);
+      const xpDefender = pvpXpReward(attacker.level, defenderWon);
+      const protectUntil = new Date(now.getTime() + PVP_PROTECTION_MINUTES * 60000);
+
+      const attackerUpdate = computeCharacterUpdate(attacker, {
+        xpGained: xpAttacker,
+        goldGained: 0,
+        won: attackerWon,
+        draw,
+        isPvp: true,
+        postBattleHp: outcome.finalHpA,
+      });
+      attackerUpdate.data.energy = { decrement: ENERGY_PVP_COST };
+      attackerUpdate.data.lastPvpAttackAt = now;
+      if (defenderWon) {
+        attackerUpdate.data.pvpProtectedUntil = protectUntil;
+      }
+
+      const defenderUpdate = computeCharacterUpdate(defender, {
+        xpGained: xpDefender,
+        goldGained: 0,
+        won: defenderWon,
+        draw,
+        isPvp: true,
+        postBattleHp: outcome.finalHpB,
+      });
+      if (attackerWon) {
+        defenderUpdate.data.pvpProtectedUntil = protectUntil;
+      }
+
+      await tx.character.update({ where: { id: attacker.id }, data: attackerUpdate.data });
+      await tx.character.update({ where: { id: defender.id }, data: defenderUpdate.data });
+
+      const log: BattleLogData = {
+        version: 1,
+        attacker: {
+          name: attacker.name,
+          startHp: Math.max(1, attacker.hp),
+          avatarKey: attacker.avatarKey,
+          gender: attacker.gender,
+          level: attacker.level,
+          kind: "character",
+        },
+        defender: {
+          name: defender.name,
+          startHp: Math.max(1, defender.hp),
+          avatarKey: defender.avatarKey,
+          gender: defender.gender,
+          level: defender.level,
+          kind: "character",
+        },
+        turns: outcome.turns,
+        winner: outcome.winner,
+        finalHpA: outcome.finalHpA,
+        finalHpB: outcome.finalHpB,
+        rewards: {
+          won: attackerWon,
+          draw,
+          xpGained: xpAttacker,
+          goldGained: 0,
+          leveledUp: attackerUpdate.leveledUp,
+          newLevel: attackerUpdate.newLevel,
+          lootName: null,
+        },
+      };
+
+      const battle = await tx.battle.create({
+        data: {
+          type: "PVP",
+          result: attackerWon ? "ATTACKER_WIN" : draw ? "DRAW" : "DEFENDER_WIN",
+          attackerId: attacker.id,
+          defenderId: defender.id,
+          log: log as unknown as object,
+          xpGained: xpAttacker,
+          goldGained: 0,
         },
       });
       return battle.id;
