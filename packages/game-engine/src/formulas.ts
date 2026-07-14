@@ -17,6 +17,9 @@ export const STARTING_GOLD = 50;
 
 export const MAX_LEVEL = 60;
 
+export const UNARMED_WEAPON_BASE = 3;
+export const ENERGY_BATTLE_COST = 6;
+
 const BASE_HP = 60;
 const HP_PER_ENDURANCE = 8;
 const HP_PER_LEVEL = 6;
@@ -40,3 +43,36 @@ export const STAT_KEYS = [
 ] as const;
 
 export type StatKey = (typeof STAT_KEYS)[number];
+
+export const COMBAT = {
+  maxRounds: 30,
+  hitBase: 0.75,
+  hitPerPoint: 0.02,
+  hitFloor: 0.2,
+  hitCeil: 0.95,
+  strengthDamageCoeff: 0.8,
+  enduranceReductionCoeff: 0.4,
+  armorReductionCoeff: 0.5,
+  damageVariance: 0.15,
+  critChance: 0.08,
+  critMultiplier: 1.5,
+  minDamage: 1,
+} as const;
+
+export function hitChance(attackerWisdom: number, defenderAgility: number): number {
+  const raw = COMBAT.hitBase + (attackerWisdom - defenderAgility) * COMBAT.hitPerPoint;
+  return Math.min(COMBAT.hitCeil, Math.max(COMBAT.hitFloor, raw));
+}
+
+export function baseDamage(
+  weaponBase: number,
+  strength: number,
+  defenderEndurance: number,
+  defenderArmor: number,
+): number {
+  const offense = weaponBase + strength * COMBAT.strengthDamageCoeff;
+  const defense =
+    defenderEndurance * COMBAT.enduranceReductionCoeff +
+    defenderArmor * COMBAT.armorReductionCoeff;
+  return Math.max(COMBAT.minDamage, offense - defense);
+}
